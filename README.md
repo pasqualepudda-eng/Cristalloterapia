@@ -10,15 +10,17 @@ Payoff: *Trasforma la tua energia. Trasforma la tua vita come la desideri.*
 
 Il mockup gira sulla **porta 5500**.
 
-**A. Live Server di VS Code** — con la cartella `chakra` aperta e "Go Live" acceso:
+**A. Live Server di VS Code** — con questa cartella aperta e "Go Live" acceso:
 
-    http://127.0.0.1:5500/yogaalliance-clone/index.html
+    http://127.0.0.1:5500/
 
 **B. Server dedicato** — doppio clic su **`avvia.command`**.
 
 Da terminale, dentro questa cartella:
 
     python3 -m http.server 5500 --bind 127.0.0.1
+
+Il sito sta nella radice del progetto: l'indirizzo e' diretto, senza sottocartelle.
 
 > Usa `127.0.0.1` e non `localhost`: se hai altri server sulla stessa porta, `localhost`
 > puo' risolvere prima su IPv6 e finire su quelli.
