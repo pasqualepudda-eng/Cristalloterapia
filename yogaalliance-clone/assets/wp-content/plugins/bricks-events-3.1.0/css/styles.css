@@ -1,0 +1,188 @@
+.bricks-events-filters select, .bricks-events-filters input, .bricks-events-filters button { margin:5px; }
+.event-row{ display:flex; align-items:center; border-bottom:1px solid #eee; padding:10px 0; }
+.event-date-block {
+   width: 60px;
+   height: 60px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-right: 20px;
+   border-radius: 4px;
+   background-color: #003944;
+   color: white;
+   border: 0;
+}
+
+.event-toggle {
+   position: relative;
+   right: 0;
+   width: 24px;
+   height: 24px;
+   background: #aacec5;
+   text-align: center;
+   border-radius: 4px;
+   line-height: 24px;
+}
+.event-info h4 a {
+    text-decoration: none;
+    color: inherit;
+}
+.bricks-past-event-filters, .bricks-events-filters, .bricks-visibility-events-filters{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:16px; }
+.past-filter-button{ padding:6px 16px; border:1px solid #aacec5; border-radius:999px; background:transparent; color:#2b3e50; text-decoration:none; }
+.no-events{ text-align:center; }
+
+.event-row {
+  display: grid;
+  grid-template-columns: 10% 1fr 10%;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+.event-row{
+  grid-template-columns: auto 1fr auto;
+    align-items: start;
+}
+
+.event-date-block {
+  /* ya lo tienes con 60×60 y styling */
+}
+.event-info {
+  /* aquí irá el título (<h4>) y el excerpt como subtítulo */
+}
+.event-toggle {
+  /* ajusta para centrar el “+” en su celda */
+  justify-self: center;
+  background: #aacec5;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.event-toggle a{
+	text-decoration:none!important;
+}
+#brxe-ilvjzi {
+    padding-left: 60px;
+}
+.past-filter-button {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid #aacec5;
+    border-radius: 999px;
+    background-color: transparent;
+    color: #2b3e50;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.past-filter-button:hover {
+    background-color: #f0f8f7;
+}
+.past-filter-button{
+	border-color:#aacec5!important;
+}
+
+
+.event-row .event-now {
+  background-color: #003944;
+    padding: 5px 7px;
+    border-radius: 40px;
+    color: #fff !important;
+    width: 35%;
+    justify-content: center;
+}
+.event-row .event-now a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+      text-align: center;
+}
+.event-row .event-now .event-toggle {
+      border-radius: 30px;
+    width: 47px;
+    height: 32px;
+}
+.event-row .event-now .event-toggle a {
+    width: 27px !important;
+}
+
+/* Responsive ajustes */
+@media (max-width: 600px) {
+  .event-row {
+    grid-template-columns: 40px 1fr 24px;
+    gap: 8px;
+  }
+  .event-date-block {
+    width: 40px;
+    height: 40px;
+  }
+  .event-info h4 {
+    font-size: 1em;
+  }
+  .event-info p {
+    font-size: 0.8em;
+  }
+  .event-toggle {
+    width: 20px;
+    height: 20px;
+  }
+	.month, .day{
+		font-size:12px!important;
+	}
+  .event-row .event-now {
+        width: 50%;
+  }
+}
+
+.past-events-search-form .search-field {
+  position: relative;
+  display: inline-block; /* o block width:100% si quieres ocupar todo el ancho */
+}
+
+/* Pill‑input sin fondo de icono */
+.past-events-search-form .search-field input[type="text"] {
+    width: 100%;
+    padding: 0rem 2.5rem -0.25rem 1rem;
+    border: 2px solid #0F2A44;
+    border-radius: 9999px;
+    font-size: 12px;
+    box-sizing: border-box;
+    outline: none;
+    background-color: transparent;
+}
+
+
+/* Botón de lupa posicionado encima del input */
+.past-events-search-form .search-field button {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;             /* separación desde el borde derecho */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Asegúrate de que el SVG herede tamaño y color */
+.past-events-search-form .search-field button svg {
+  width: 1.25em;
+  height: 1.25em;
+  fill: #0F2A44;
+}
+
+.past-events-search-form .search-field input[type="text"]::placeholder {
+  color: #003844;
+  opacity: 1;
+}

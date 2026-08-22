@@ -1,0 +1,21 @@
+.exdisc-denied{
+  padding:1.25rem;
+  border:1px solid #e1e1e8;
+  background:#fafafb;
+  border-radius:8px;
+  font-size:16px;
+}
+
+/* Grid for shortcode */
+.exclusive-discounts-grid{display:grid;grid-template-columns:repeat(var(--ed-cols,4),minmax(0,1fr));gap:16px}
+.discount-card{position:relative;overflow:hidden;border-radius:8px;min-height:200px;background-size:cover;background-position:center}
+.discount-mask{position:absolute;inset:0;opacity:.6}
+.discount-content{position:relative;padding:16px}
+.discount-card-link{text-decoration:none}
+
+/* Filters UI */
+.ed-filters{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+.ed-filters select{padding:8px 10px;border:1px solid #d5d7de;border-radius:6px}
+.ed-filters label{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border:1px solid #e5e7ef;border-radius:6px;background:#fff}
+
+.discount-card-link.exdisc-hidden{display:none!important}
