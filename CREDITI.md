@@ -14,15 +14,16 @@ da solo, senza toccare l'HTML.
 | File | Titolo originale | Autore | Licenza | Pagina di origine |
 |---|---|---|---|---|
 | `acqua.jpg` | Nature Water | Donald Tong | CC0 1.0 | https://stocksnap.io/photo/nature-water-9GENAR5CSP |
-| `alba.jpg` | Morning Fog | Elliott Chau | CC0 1.0 | https://stocksnap.io/photo/morning-fog-UTC9TOVAXW |
+| `alba.jpg` | Snow-capped Annapurna mountain | Rashed Hossain | CC0 1.0 | https://wordpress.org/photos/photo/508699179c/ |
 | `candela.jpg` | Candles Flames | Freestocks.org | CC0 1.0 | https://stocksnap.io/photo/candles-flames-EZ95OEOSLM |
 | `cosmo.jpg` | Night Stars | Stephen Rahn | CC0 1.0 | https://stocksnap.io/photo/night-stars-ZQNRV0XTTN |
+| `cometa.jpg` | Comet NEOWISE | Deborah Lee Soltesz | CC0 1.0 | https://commons.wikimedia.org/w/index.php?curid=97079583 |
 | `cristalli.jpg` | Free beautiful crystal quartz image | — | CC0 1.0 | https://www.rawpixel.com/image/5908353/photo-image-aesthetic-public-domain-nature |
 | `foresta.jpg` | Sun Trees | Matt Moloney | CC0 1.0 | https://stocksnap.io/photo/sun-trees-BPWSN5EFQC |
 | `incenso.jpg` | Free smoke incenses temple image | — | CC0 1.0 | https://www.rawpixel.com/image/5927685/photo-image-public-domain-black-smoke |
 | `libro.jpg` | Still Items | Aaron Burden | CC0 1.0 | https://stocksnap.io/photo/still-items-0DS255SCBZ |
 | `loto.jpg` | Flowers Nature | Tj Holowaychuk | CC0 1.0 | https://stocksnap.io/photo/flowers-nature-BBJRN5PXFN |
-| `luna.jpg` | Beach full moon night | — | CC0 1.0 | https://www.rawpixel.com/image/6018182/photo-image-clouds-moon-light |
+| `luna.jpg` | Moon Ocean | JJ Skys the Limit | CC0 1.0 | https://stocksnap.io/photo/moon-ocean-JLUHRYXJE1 |
 | `mandala.jpg` | Altar Table Mandala Amitayus, Buddha | artinstitutechicago | CC0 1.0 | https://www.rawpixel.com/image/8954497/altar-table-with-mandala-amitayus-the-buddha-infinite-life |
 | `mani-luce.jpg` | Hand Light | Valeria Boltneva | CC0 1.0 | https://stocksnap.io/photo/hand-light-3SVF6UX37U |
 | `mare.jpg` | Ocean Water | Matt Moloney | CC0 1.0 | https://stocksnap.io/photo/ocean-water-LMMFQHNLEX |

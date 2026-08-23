@@ -111,7 +111,7 @@ riscrivere tutti i link interni. I contenuti non hanno piu' nulla in comune con 
 - **Contatti**: WhatsApp, email, Instagram e Facebook sono **segnaposto** ("da inserire"),
   perche' nel catalogo i campi sono vuoti. Vanno compilati in `media-inquiries.html`.
 - **Dati fiscali**: ragione sociale, indirizzo e P.IVA sono da inserire nelle pagine legali.
-  Nel catalogo compare solo "Fano e provincia".
+  Il catalogo non riporta una sede: il sito indica "in tutta Italia" per gli eventi in presenza.
 - **Nome della titolare**: non compare nel catalogo, quindi il sito parla in prima persona
   senza firma. Se va aggiunto, e' un search/replace.
 - **Testimonianze**: non ce ne sono nel catalogo, quindi non esiste una pagina dedicata.
