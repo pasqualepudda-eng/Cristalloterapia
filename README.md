@@ -31,65 +31,67 @@ Il sito sta nella radice del progetto: l'indirizzo e' diretto, senza sottocartel
 
 | Voce | Prezzo | File |
 |---|---|---|
-| Reiki Energia dal Mare | € 99 | `meet-yoga-alliance.html` |
-| Reiki Usui con Cristalli | € 99 | `benefits-of-yoga.html` |
-| Fiori di Bach con Codici Lemuriani | € 99 | `yoga-that-meets-you.html` |
-| Cristalloterapia Eterica con 11 Intenti | da € 119 | `what-is-yoga.html` |
-| Gli 11 Cristalli Intento (guida) | — | `research-insights.html` |
-| Come funziona a distanza | — | `find-a-yoga-teacher.html` |
+| Reiki Energia dal Mare | € 99 | `/reiki-energia-dal-mare/` |
+| Reiki Usui con Cristalli | € 99 | `/reiki-usui-con-cristalli/` |
+| Fiori di Bach con Codici Lemuriani | € 99 | `/fiori-di-bach-con-codici/` |
+| Cristalloterapia Eterica con 11 Intenti | da € 119 | `/cristalloterapia-eterica/` |
+| Gli 11 Cristalli Intento (guida) | — | `/intenti/` |
+| Come funziona a distanza | — | `/come-funziona-a-distanza/` |
 
 **I Percorsi** (tutti a distanza, con colloquio iniziale di 60 minuti)
 
 | Percorso | Composizione | Prezzo | File |
 |---|---|---|---|
-| Oceano | 5 sessioni Reiki Energia dal Mare | € 449 (€ 495) | `explore-training-options.html` |
-| Stella | 5 sessioni Reiki Usui + Cristalloterapia | € 449 (€ 495) | `find-a-yoga-school.html` |
-| Sole | 5 Fiori di Bach + 5 Reiki dal Mare | € 929 (€ 990) | `teacher-resources.html` |
-| Arcobaleno | 5 Fiori + 5 Reiki Usui con Cristalli | € 929 (€ 990) | `member-benefits-for-individuals.html` |
-| Gold | 13 incontri + Sigillo Luce Diamantina | € 1.069 (€ 1.228) | `continuing-education.html` |
-| Premium | 14 sessioni + Sigillo Ritorno al Cuore | € 1.109 (€ 1.347) | `explore-credentialing-options.html` |
-| Five Stars | 14 sessioni, 11 Intenti + Sigillo Stella Cometa | € 1.149 (€ 1.429) | `member-benefits-for-providers.html` |
-| Confronta i percorsi | tutti e sette a confronto | — | `growing-yogas-reach.html` |
+| Oceano | 5 sessioni Reiki Energia dal Mare | € 449 (€ 495) | `/percorso-oceano/` |
+| Stella | 5 sessioni Reiki Usui + Cristalloterapia | € 449 (€ 495) | `/percorso-stella/` |
+| Sole | 5 Fiori di Bach + 5 Reiki dal Mare | € 929 (€ 990) | `/percorso-sole/` |
+| Arcobaleno | 5 Fiori + 5 Reiki Usui con Cristalli | € 929 (€ 990) | `/percorso-arcobaleno/` |
+| Gold | 13 incontri + Sigillo Luce Diamantina | € 1.069 (€ 1.228) | `/percorso-gold/` |
+| Premium | 14 sessioni + Sigillo Ritorno al Cuore | € 1.109 (€ 1.347) | `/percorso-premium/` |
+| Five Stars | 14 sessioni, 11 Intenti + Sigillo Stella Cometa | € 1.149 (€ 1.429) | `/percorso-five-stars/` |
+| Confronta i percorsi | tutti e sette a confronto | — | `/confronta-i-percorsi/` |
 
 **Di più / footer**
 
 | Voce | File |
 |---|---|
-| Prenota una sessione | `events.html` |
-| Domande Frequenti | `domande-frequenti.html` |
-| Area riservata | `area-riservata.html` |
-| Prezzi (listino completo) | `prezzi.html` |
-| Newsletter | `newsletter.html` |
-| Testimonianze | `testimonianze.html` |
-| Eventi in presenza | `eventi-in-presenza.html` |
+| Prenota una sessione | `/prenota/` |
+| Domande Frequenti | `/domande-frequenti/` |
+| Area riservata | `/area-riservata/` |
+| Prezzi (listino completo) | `/prezzi/` |
+| Newsletter | `/newsletter/` |
+| Testimonianze | `/testimonianze/` |
+| Eventi in presenza | `/eventi-in-presenza/` |
 
 **Approfondimenti** — un argomento, una pagina
 
 | Argomento | File |
 |---|---|
-| I Sette Chakra | `sette-chakra.html` |
-| I Codici Lemuriani | `codici-lemuriani.html` |
-| I 38 Fiori di Bach | `fiori-di-bach.html` |
-| La boccetta in erboristeria | `boccetta-erboristeria.html` |
-| La musica di guarigione | `musica-di-guarigione.html` |
-| La sfera di luce | `sfera-di-luce.html` |
-| La griglia di cristalli | `griglia-di-cristalli.html` |
-| I Sigilli | `sigilli.html` |
-| La scheda cliente | `scheda-cliente.html` |
+| I Sette Chakra | `/sette-chakra/` |
+| I Codici Lemuriani | `/codici-lemuriani/` |
+| I 38 Fiori di Bach | `/fiori-di-bach/` |
+| La boccetta in erboristeria | `/boccetta-erboristeria/` |
+| La musica di guarigione | `/musica-di-guarigione/` |
+| La sfera di luce | `/sfera-di-luce/` |
+| La griglia di cristalli | `/griglia-di-cristalli/` |
+| I Sigilli | `/sigilli/` |
+| La scheda cliente | `/scheda-cliente/` |
 
-**Gli 11 Cristalli Intento** — una pagina ciascuno, indicizzate da `research-insights.html`
+**Gli 11 Cristalli Intento** — una pagina ciascuno, indicizzate da `/intenti/`
 
 `intento-abbondanza` · `intento-portale-lemuriano` · `intento-iside` ·
 `intento-aura-angelo` · `intento-ponte-quarzo` · `intento-chiave-quarzo` ·
 `intento-fantasma-quarzo` · `intento-apofillite` · `intento-guardiano-registri` ·
 `intento-fiamma-gemella` · `intento-collegamenti-temporali`
-| Chi sono | `meet-our-team.html` |
-| Formazione e metodo | `careers.html` |
-| Contatti | `media-inquiries.html` |
-| Note legali · Privacy · Condizioni d'uso · Disclaimer | `policies-priorities-progress*.html` |
+| Chi sono | `/chi-sono/` |
+| Formazione e metodo | `/formazione-e-metodo/` |
+| Contatti | `/contatti/` |
+| Note legali | `/note-legali/` |
+| Privacy Policy | `/privacy-policy/` |
+| Condizioni d'uso | `/condizioni-uso/` |
+| Disclaimer | `/disclaimer/` |
 
-I nomi dei file sono quelli originali di Yoga Alliance: rinominarli richiederebbe di
-riscrivere tutti i link interni. I contenuti non hanno piu' nulla in comune con essi.
+I nomi dei file corrispondono al servizio contenuto in ogni pagina.
 
 ## Che cosa e' stato fatto
 
@@ -109,13 +111,13 @@ riscrivere tutti i link interni. I contenuti non hanno piu' nulla in comune con 
 ## Da completare prima di andare online
 
 - **Contatti**: WhatsApp, email, Instagram e Facebook sono **segnaposto** ("da inserire"),
-  perche' nel catalogo i campi sono vuoti. Vanno compilati in `media-inquiries.html`.
+  perche' nel catalogo i campi sono vuoti. Vanno compilati in `/contatti/`.
 - **Dati fiscali**: ragione sociale, indirizzo e P.IVA sono da inserire nelle pagine legali.
   Il catalogo non riporta una sede: il sito indica "in tutta Italia" per gli eventi in presenza.
 - **Nome della titolare**: non compare nel catalogo, quindi il sito parla in prima persona
   senza firma. Se va aggiunto, e' un search/replace.
 - **Testimonianze**: non ce ne sono nel catalogo, quindi non esiste una pagina dedicata.
-  Se ne raccogli, la struttura piu' adatta e' `research-insights.html`.
+  Se ne raccogli, la struttura piu' adatta e' `/intenti/`.
 - **Privacy e condizioni d'uso**: testi generici su modello GDPR, **da far validare**.
   Il Disclaimer, invece, riporta il testo del catalogo.
 - **Foto**: sono di repertorio. Sostituendo i file in `assets/img/` con gli stessi nomi,
@@ -123,7 +125,7 @@ riscrivere tutti i link interni. I contenuti non hanno piu' nulla in comune con 
 
 ## Prenotazione con calendario
 
-`events.html` ospita un sistema di prenotazione in quattro passaggi, scritto in JavaScript
+`/prenota/` ospita un sistema di prenotazione in quattro passaggi, scritto in JavaScript
 puro (nessuna libreria, funziona offline):
 
 1. **Servizio** — le 4 sessioni singole e i 7 percorsi, con il prezzo di ciascuno.
@@ -141,7 +143,7 @@ e la pagina lo dice.
 
 ## La galleria di Chi sono
 
-`meet-our-team.html` ospita i sette ritratti di studio forniti dal cliente, in una griglia
+`/chi-sono/` ospita i sette ritratti di studio forniti dal cliente, in una griglia
 asimmetrica a 12 colonne con didascalie in hover e zoom morbido. Responsive a tre soglie
 (12 colonne, 6 colonne, colonna singola). I file sono in `assets/img/ritratto-*.jpg`.
 
@@ -156,19 +158,19 @@ Ogni pulsante che prima usciva dal sito ora porta a una pagina interna:
 
 | Pulsante | Destinazione |
 |---|---|
-| Inizia qui | `events.html` (Prenota una sessione) |
-| Accedi / Manage Account | `area-riservata.html` **(nuova)** |
-| Scrivimi / Contact Support | `media-inquiries.html` (Contatti) |
-| Domande Frequenti / Help Center | `domande-frequenti.html` **(nuova)** |
+| Inizia qui | `/prenota/` (Prenota una sessione) |
+| Accedi / Manage Account | `/area-riservata/` **(nuova)** |
+| Scrivimi / Contact Support | `/contatti/` (Contatti) |
+| Domande Frequenti / Help Center | `/domande-frequenti/` **(nuova)** |
 | Guide e Standards (PDF) | la pagina della sessione o del percorso corrispondente |
 | Code of Conduct, Scope of Practice, Ethical Commitment | `...accessibility-statement.html` (Disclaimer) |
-| Scientific Research (22 voci) | `research-insights.html` (Gli 11 Cristalli Intento) |
-| Social del footer | `media-inquiries.html` (Contatti) |
+| Scientific Research (22 voci) | `/intenti/` (Gli 11 Cristalli Intento) |
+| Social del footer | `/contatti/` (Contatti) |
 
 L'unico dominio esterno rimasto e' `www.w3.org`, che compare solo come namespace `xmlns`
 degli SVG: non e' un collegamento.
 
 ## Che cosa non funziona (e non puo' funzionare)
 
-Ricerca, login, form e carrello richiedono un backend: sono inerti. `area-riservata.html`
+Ricerca, login, form e carrello richiedono un backend: sono inerti. `/area-riservata/`
 e' un segnaposto e lo dichiara esplicitamente nella pagina.
