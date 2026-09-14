@@ -1,0 +1,393 @@
+# Checklist operativa
+
+Una riga per ogni voce, dal 27 agosto in poi. Il dettaglio completo è in
+`02-MODIFICHE-DETTAGLIATE.md` sotto lo stesso ID.
+
+
+## 27/08
+
+- [ ] 🎧 **MOD-001** (10:47) `[1 file]` — (solo allegato)
+- [ ] ℹ️ **MOD-002** (10:49) — Quindi URL www.alchimiainteriore.com?
+- [ ] ℹ️ **MOD-003** (11:52) — Scheletro della campagna pubblicitaria: -lead generation diretta -pubblico, ovvero il target: Donne e uomini interessati al mon…
+- [ ] ℹ️ **MOD-004** (11:52) — Quanto si paga per contatto (CPL) e Prospetto ROI: Con 75€ l'obiettivo primario non è fare centinaia di vendite, ma testare il …
+- [ ] ℹ️ **MOD-005** (11:52) — Ciao Pasquale ti giro le risposte, quando hai tempo dai un'occhiata! Grazie
+- [ ] ℹ️ **MOD-006** (12:36) — Piano piano che correggo ti invio le singole correzioni
+- [x] **MOD-007** (12:50) `[1 file]` — Le sessioni si svolgono, in videochiamata: ti basta un posto tranquillo, dove poter ricevere comodamente da casa tua. Ogni sess…
+- [x] **MOD-008** (12:51) `[1 file]` — Integrata con codici lemuriani o cristalli
+- [ ] **MOD-009** (12:52) `[1 file]` — Reiki di Atlantide "energia dal mare
+- [x] **MOD-010** (12:54) `[1 file]` — Toglie stress invece che pulisce stanchezza e memorie antiche non vecchie
+- [x] **MOD-011** (12:55) `[1 file]` — Nasce dal popolo di Atlantide
+- [x] **MOD-012** (13:00) `[1 file]` — Sciolgono i blocchi come le onde si infrangono sulla riva
+- [x] **MOD-013** (13:03) `[1 file]` — Pulire, stress pesantezza e memorie antiche che necessitano essere rimosse
+- [x] **MOD-014** (13:04) `[1 file]` — Connessione con la nostra anima
+- [ ] **MOD-015** (13:15) `[1 file]` — Chiudiamo mi collego ad Atlantide, ti faccio il trattamento integrandolo con i codici lemuriani. Ci risentiamo: ti spiego dove …
+- [x] **MOD-016** (13:23) `[1 file]` — 99 invece che 120 E cosi anche per i percorsi
+- [x] **MOD-017** (13:24) — Le promozioni ovunque siano segnalati i prezzi
+- [ ] **MOD-018** (13:33) `[1 file]` — Il risultato Ti connette al popolo di Atlantide Ti purifica Ti rigenera
+- [x] **MOD-019** (13:41) `[1 file]` — Ci sono due volte come lavora
+- [ ] **MOD-020** (13:56) `[1 file]` — I cristalli lo potenziano
+- [ ] **MOD-021** (14:02) `[1 file]` — Invece che radicano.....promuovono equilibrio emotivo e chiarezza mentale
+- [ ] **MOD-022** (14:08) `[1 file]` — Il reiki canalizza l'energia vitale attraverso le mani, i cristalli amplificano l'energia , focalizzano l'intento, assorbono bl…
+- [ ] **MOD-023** (14:11) `[1 file]` — Mentre io posiziono.....cambiare con dopo aver posizionato i cristalli
+- [ ] **MOD-024** (14:18) `[1 file]` — E resti 10 min in meditazione per accogliere la chi ball che ho preparato per te con dentro il trattamento , te la porti al cuo…
+- [ ] **MOD-025** (14:22) `[1 file]` — A posta della ricetta miscela personalizzata con 4/6 fiori secondo le esigenze
+- [x] **MOD-026** (14:27) `[1 file]` — Predominanti non si legge bene la d
+- [ ] **MOD-027** (14:28) `[1 file]` — Massimo sei sono quelle che servono a te adesso
+- [x] **MOD-028** (14:30) `[1 file]` — Scopri il percorso sole togliere " la"
+- [x] **MOD-029** (14:31) `[1 file]` — Scopri la consulenza togliere "i"
+- [ ] **MOD-030** (14:33) `[1 file]` — Accoglierle e percepirne gli effetti
+- [ ] **MOD-031** (14:42) `[1 file]` — Solo dagli abusi: taglia i legami energetici che non servono piu' togliere solo in questo caso la parola "energetici"
+- [ ] ℹ️ **MOD-032** (15:43) — No Pasquale devo vedere ancora i percosi, faccio pausa che sono in compagnia adesso riprendo tra un'oretta a fare le correzioni
+- [ ] ℹ️ **MOD-033** (15:43) — Quando ho terminato ti avviso
+- [ ] **MOD-034** (17:03) `[1 file]` — Fino a 6 fiori scelti per te
+- [ ] **MOD-035** (17:06) `[1 file]` — Quando uno stato emotivo si scioglie, il fiore che lo riguardava esce dalla miscela e lascia spazio ad uno nuovo se necessario
+- [ ] **MOD-036** (17:09) `[1 file]` — Il pagamento viene effettuato prima della sessione o del percorso. Se hai un 'imprevisto..ecc rimane uguale
+- [x] **MOD-037** (17:27) `[1 file]` — Eventi in presenza a Fano e provincia principalmente e anche tutto italia
+- [ ] **MOD-038** (17:28) `[2 file]` — La fo dove non c'e' lo sfondo mettere questa con lo sfondo
+- [ ] **MOD-039** (17:47) `[1 file]` — Frequenze vibratorie alte
+- [ ] **MOD-040** (17:55) `[1 file]` — quattro sessioni singole da 50 minuti e sette percosi che le combinano: potremmo raggiungere piccoli obbiettivi con qualche ses…
+- [x] **MOD-041** (18:20) `[1 file]` — Percorso gold arcobaleno silver luce diamantina Percorso five stars sigillo della stella cometa Percorso sole stella e luna sig…
+- [x] **MOD-042** (18:23) — I sigilli ritorno al cuore , stella Cometa sevono per consacrare il lavoro fatto e mantenerlo nel tempo
+- [x] **MOD-043** (18:24) `[1 file]` — Se possibile mettere la freccetta anche nel sigillo del ritorno al cuore e della stella cometa
+- [x] **MOD-044** (18:27) `[1 file]` — Solo prima seduta di 60 min che comprende colloquio iniziale, scheda cliente e primo trattamento
+- [x] **MOD-045** (18:28) `[1 file]` — Fano e provincia principalmente ma anche in tutta italia
+- [ ] **MOD-046** (18:30) `[1 file]` — 5 sessioni reiki di Atlantide "energia dal mare "
+- [ ] **MOD-047** (18:32) `[1 file]` — Percorso sole 10 sessioni miste
+- [ ] **MOD-048** (18:32) `[1 file]` — 10 sessioni miste
+- [ ] **MOD-049** (18:33) `[1 file]` — 13 sessioni miste
+- [ ] **MOD-050** (18:35) `[2 file]` — Foto percorso stella al posto della seguente
+- [x] **MOD-051** (18:39) `[1 file]` — In questi due percorsi 14 sessioni miste le foto ok
+- [ ] **MOD-052** (18:54) `[1 file]` — Come si svolge una sessione a distanza Per reiki usui e atlantide"energia dal mare" e cristalloterapia eterica tutto uguale com…
+- [x] **MOD-053** (18:56) `[1 file]` — Colloquio iniziale di 60 min compreso primo trattamento e sessioni successive comprese tra 45 e 50 min
+- [ ] **MOD-054** (18:58) `[1 file]` — Posso adformentarmi? Potrebbe capitare: e' il segnale...ecc..
+- [ ] **MOD-055** (19:00) `[1 file]` — A posto di appesantita esausta
+- [x] **MOD-056** (19:02) `[1 file]` — Si tengono in presenza a Fano e provincia soprattutto ma anche in tutta italia
+- [x] **MOD-057** (19:15) `[1 file]` — Esperienza: estetista da 25 anni esperta da 27 anni di fiori di bach e reiki Usui....togliere codici lemuriani
+- [x] **MOD-058** (19:16) `[1 file]` — La sede: sessioni online da ovunque tu sia; eventi in presenza su Fano e provincia soprattutto ma anche resto di italia
+- [ ] **MOD-059** (19:17) `[1 file]` — Atlantide : la frequenza dal mare
+- [ ] **MOD-060** (19:18) `[1 file]` — La frequenza dal mare
+- [ ] **MOD-061** (19:20) — Simile a questa senza scritta
+- [x] **MOD-062** (19:24) `[1 file]` — Sciolgono come onde che s'infrangono sul mare
+- [x] **MOD-063** (19:26) `[1 file]` — Qui c'e' qualcosa che non va: se apro atlantidemi da
+- [x] **MOD-064** (19:26) `[1 file]` — Mi da questo se apro atlandide
+- [x] **MOD-065** (19:27) `[1 file]` — Se apro delfini mi da questo
+- [x] **MOD-066** (19:28) `[1 file]` — Se apro balene mi da questo che e' giusto
+- [x] **MOD-067** (19:28) `[1 file]` — Se apro codici lemuriani mi da questo errato
+- [x] **MOD-068** (19:29) `[1 file]` — Se apro corpo eterico mi da questo errato
+- [x] **MOD-069** (19:33) `[1 file]` — Se apro corpo eterico mi da questo errato
+- [x] **MOD-070** (19:34) `[1 file]` — Se apro i chakra mi da questo errato
+- [x] **MOD-071** (19:37) `[1 file]` — Se apro campo aurico mi da questo errato ..sono tutti da invertire
+- [x] **MOD-072** (19:39) `[2 file]` — Foto campo aurico da sostituire con questa Ecco foto campo aurico
+- [x] **MOD-073** (19:55) `[5 file]` — Foto dei delfini mettere questa Al posto di questa Da sostituire con questa Con questa balene Cioe' questa
+- [x] **MOD-074** (20:08) `[2 file]` — Questa dei chakra da sostituire con questa
+- [x] **MOD-075** (20:11) `[1 file]` — Corpo eterico questa qui sopra da sostituire con questa di srguito
+- [x] **MOD-076** (20:13) `[2 file]` — Foto di atlantide Da sostituire con questa di srguito
+- [x] **MOD-077** (20:15) `[2 file]` — Foto codici lemuriani Da sostituire con questa
+- [x] **MOD-078** (20:23) `[2 file]` — Questa foto per il percorso oro Da sostituire con questa
+- [x] **MOD-079** (20:27) `[2 file]` — Percorso sole da sostituire con questa Ecco quella da sostituire
+- [x] **MOD-080** (20:30) `[2 file]` — Questa da sostituire alla foto percorso premium Con questa
+- [x] **MOD-081** (20:36) `[2 file]` — Questa Da sostituire al percorso five stars Da sostituire con la seguente
+- [x] **MOD-082** (20:42) `[3 file]` — Questa e' la foto del portale di legno griglia dei cristalli Da sostituire con la seguente
+- [x] **MOD-083** (20:45) `[2 file]` — Questa con la sfera di luce da sostituire con la seguente
+- [ ] **MOD-084** (20:49) `[1 file]` — Questa per il sigillo della luce diamantina da da sotituire con questa
+- [x] **MOD-085** (20:54) `[2 file]` — Questa oer il sigillo di ritorno al cuore Al posto di questa
+- [x] **MOD-086** (21:02) `[2 file]` — Foto sigillo stella cadente da sostituire con la seguente
+- [x] **MOD-087** (21:04) `[1 file]` — Prima sessione di 60 min che comprende il COLLOQUIO INIZIALE
+- [x] **MOD-088** (21:07) `[2 file]` — Questa foto da sostituire con quella di seguito sessione online Con questa
+- [x] **MOD-089** (21:08) `[1 file]` — Questa per gli eventi in presenza da sostituire con questa
+- [x] **MOD-090** (21:10) `[1 file]` — Da sostituire con questa Sotto scrivere soprattutto fano e provincia e anche tutta italia
+- [x] **MOD-091** (21:12) `[1 file]` — Questa da sostituire con la srguente
+- [x] **MOD-092** (21:14) `[1 file]` — E sotto scrivere LIVELLO MASTER REIKI DI ATLANTIDE "energia dal mare" Formazione in presenza
+- [x] **MOD-093** (21:16) `[1 file]` — Questo va bene la foto scrivere: REIKI USUI 2 LIVELLO Trattamenti a distanza
+- [x] **MOD-094** (21:19) `[1 file]` — Qusta foto da sostituire per master reiki Da sostituire con la seguente
+- [x] **MOD-095** (21:21) `[1 file]` — MASTER CRISTALLOTERAPIA trattamenti di cristalloterapia eterica a distanza
+- [x] **MOD-096** (21:24) `[2 file]` — Questa foto da sostituire con quella presente
+- [x] **MOD-097** (21:28) `[1 file]` — Quests da sostituire con la srguente
+- [x] **MOD-098** (21:28) `[1 file]` — Scrivere sotto CODICI LEMURIANI Esperienza
+- [x] **MOD-099** (21:35) `[1 file]` — Nell'esperienza: estetista da 25 anni, esperta da 27 anni in fiori di bach ed esperta in codici lemuriani( inserire la parola e…
+- [ ] **MOD-100** (21:37) `[1 file]` — Qui le foto cambiarle con quelle fornite sopra
+- [ ] **MOD-101** (21:38) `[1 file]` — Anche qui cambiarle con quelle fornite sopra a parte le seguenti che sono nuove
+- [x] **MOD-102** (21:42) `[2 file]` — Percorso oceano da sostituire con la seguente
+- [x] **MOD-103** (21:44) `[2 file]` — Questa da sostituire con la seguente
+- [x] **MOD-104** (21:46) `[1 file]` — Questa da sostituire con la seguente
+- [x] **MOD-105** (21:47) `[1 file]` — Erboresteria
+- [x] **MOD-106** (21:49) `[1 file]` — Questa da sostituire con la seguente
+- [x] **MOD-107** (21:50) `[1 file]` — Sigillo
+- [x] **MOD-108** (21:52) `[2 file]` — Questa da sostituire con la seguente
+- [x] **MOD-109** (21:54) `[1 file]` — Queste pure quando clicchi sulla freccetta sono scompagnate da riordinarle
+- [ ] 🎧 **MOD-110** (21:55) `[1 file]` — (solo allegato)
+- [ ] ℹ️ **MOD-111** (21:56) — Pero' URL puoi gia' darmelo?
+- [x] **MOD-112** (21:57) `[1 file]` — Tutti i percorsi finiscono adesso con un sigillo
+- [ ] 🎧 **MOD-113** (21:57) `[1 file]` — (solo allegato)
+- [x] **MOD-114** (22:00) `[1 file]` — Questa da sostituire in questa ultima foto
+- [ ] **MOD-115** (22:07) `[1 file]` — Da cambiare la foto con quella sopra Si parte da dove sei: non serve aver fatto gia' percorsi olistici ne' avere esperienza di …
+- [x] **MOD-116** (22:12) `[1 file]` — Anche qui scivere accreditata fenop importante
+- [x] **MOD-117** (22:13) `[1 file]` — Qui invece che 1 grado mettere primo livello
+- [x] **MOD-118** (22:14) `[1 file]` — Sessioni con una i sola
+- [ ] **MOD-119** (22:19) `[1 file]` — Acquisti e pagamenti: le sessioni ed i percorsi si prenotano dalla pagina contatti. Prezzi e modalita' di pagamento vengono com…
+- [ ] **MOD-120** (22:26) `[1 file]` — Testi immagini resoconti e schede clienti individuali riguardo i fiori di bach sono opera dell'autrice, ecc.. tutto uguale il r…
+- [x] **MOD-121** (22:28) `[1 file]` — Invece che tutta italia mettere fano e provincia principalmente ma anche in tutta italia
+- [x] **MOD-122** (22:39) `[1 file]` — Ti allego qui la mia P IVA da inserire
+- [x] **MOD-123** (22:41) `[1 file]` — Il logo del Movimemto delle libere discipline naturali di cui sono socio benemerito dove si trova? E' importante perche' risult…
+- [ ] ℹ️ **MOD-124** (22:57) — Ti avviso : controllato tutto! ma adesso chiudo che sono sfinita. Domani rido' una controllatina generale Notte!
+
+## 28/08
+
+- [ ] **MOD-125** (10:33) `[1 file]` — Quando non e' in equilibrio ..non scoperto
+- [ ] **MOD-126** (10:35) `[1 file]` — Non chiuso ma sbilanciato
+- [ ] **MOD-127** (10:37) `[1 file]` — No alterato ma carente
+- [ ] **MOD-128** (10:38) `[1 file]` — Su entrambe a posto di chiuso sbilanciato
+- [ ] **MOD-129** (10:44) `[1 file]` — Intuito non muto ma quanto la tua connessione con l'intuito , la saggezza interiore, e' debole o ostacolata
+- [ ] **MOD-130** (10:48) `[1 file]` — Corona: governa la coscienza interiore, la spiritualita' profonda. Ci si lavora quando manca la cspacita' di vedere oltre la re…
+- [ ] **MOD-131** (10:52) `[1 file]` — Cuore: difficolta' a lasciarsi avvicinare sostituire con difficolta a lasciarsi andare...la quale nasce da un profondo meccanis…
+- [ ] **MOD-132** (10:54) `[1 file]` — Sensazione di non avere le basi sostituirw con assenza di un terreno solido
+- [ ] **MOD-133** (10:58) `[1 file]` — Piacere e capacita' di godersi le cose sostituire con accogliere le emozioni e vivere la vita con gioia e fluidita'
+- [ ] **MOD-134** (11:00) `[1 file]` — Niente di accende davvero sostituire con apatia, incapacita' di farsi accendere da passioni desideri o piaceri
+- [ ] **MOD-135** (11:06) `[1 file]` — Un chakra puo' essere ipoattivo ( chiuso o bloccato): oppure iperattivo (troppo aperto ), in entrambi i casi c'e' disagio
+- [ ] **MOD-136** (11:10) `[1 file]` — L'obiettivo non e' aprire tutto al massimo, ma riportare ogni centro alla sua misura sostituire con: l'obbiettivo non e' la mas…
+- [ ] **MOD-137** (11:13) `[1 file]` — Nel trattamento si procede dal basso verso l'alto non ha senso lavorare sulla corona se la radice e' scoperta ELIMINARE QUESTA …
+- [ ] **MOD-138** (11:18) `[1 file]` — I codici lemuriani Simboli di luce ad alta frequenza sostituire con: I codici lemuriani sono una raccolta di codici di memorie …
+- [ ] **MOD-139** (11:25) `[1 file]` — Cosa fanno: non sostituisco il trattamento ma lo amplificano lo velocizzano. Eliminare la frase: la loro energis vibrazionale v…
+- [ ] **MOD-140** (11:33) `[1 file]` — La prima frase sostituirla con: Una griglia di cristalli attivata su Piastra di ricarica in legno che raffigura il tuo corpo et…
+- [x] **MOD-141** (11:34) — Dovunque ci sia scritto PORTALE DI LEGNO sostituirlo con PIASTRA DI RICARICA IN LEGNO
+- [ ] **MOD-142** (11:39) `[1 file]` — Reiki e cristalli insieme: Sostituire la frase che c'e' scritta con: Il Reiki canalizza la luce il Reiki "sveglia" e amplifica …
+- [ ] **MOD-143** (11:47) `[1 file]` — La uso nella Cristalloterapia Eterica e nei trattamenti Reiki. Cancellare dei percorsi
+- [ ] **MOD-144** (11:49) `[1 file]` — Direttamente nel tuo campo eterico ( aggiungere )
+- [ ] **MOD-145** (11:50) `[1 file]` — LA SFERA DI LUCE O CHI BALL
+- [x] **MOD-146** (11:51) `[1 file]` — Per accogliere no l'energia ma il trattamento
+- [x] **MOD-147** (11:54) `[1 file]` — Avvii la musica ed accogli la sfera di luce contenente il trattamento che ho fatto per te. La porti ecc...
+- [x] **MOD-148** (11:57) `[1 file]` — Perche' 10 minuti Perche' servono al corpo per stabilizzare il sistema nervoso e assimilare le informazioni e le emozioni appen…
+- [x] **MOD-149** (12:11) `[1 file]` — Nei percorsi Oltre alla musica (solo per reiki Usui per Reiki "energia dal mare" e cristalloterapia eterica) ricevi, dopo ogni …
+- [ ] 🎧 **MOD-150** (12:26) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-151** (12:28) `[1 file]` — (solo allegato)
+- [ ] ℹ️ **MOD-152** (13:24) — Ok anche tre quattro giorni vedi tu, tranquillo! Importante che ho url cosi faccio stampare le locandine vado avanti con quelle!
+- [ ] **MOD-153** (13:46) `[1 file]` — Correggere la frase: lavora sulla capacita' spirituale e spicologica di ricevere.( finire qui la frase)
+- [ ] **MOD-154** (14:00) `[1 file]` — Correggere la frase: quando uno dei due prevale mettere invece: quando il Sacro maschile e' in eccesso diventa rigidita' contro…
+- [ ] **MOD-155** (14:10) `[1 file]` — Cistallo ponte di quarzo: e' l'intento....sostituire con la frase: E' l'intento piu' "generale" degli 11 e per questo funziona …
+- [ ] **MOD-156** (14:13) `[1 file]` — Cristallo fantasma di quarzo: ti aiuta tramite la visualizzazione a ricordare un momento traumatico della tua vita ecc...
+- [ ] **MOD-157** (14:19) `[1 file]` — Ti collega e ti aiuta a connetterti con le tue guide Spirituali personali. E' uno degli intenti piu' richiesti da chi ha esperi…
+- [ ] **MOD-158** (16:55) `[1 file]` — Dei cpllegamenti temporali futuri Aggiungere la parola futuri
+- [ ] **MOD-159** (16:59) `[1 file]` — Ti aiuta inoltre a non tornare...sostituire con la frase: ti aiuta attivamente al resistere al ritorno a schemi inutili del pas…
+- [ ] **MOD-160** (17:04) `[1 file]` — I cristalli del collegamento temporale del portale del seme lemuriano hanno configurazioni che consistono in un parallelogramma…
+- [ ] **MOD-161** (17:23) `[1 file]` — - i portali rivolti a sinistra possono essere usati per esplorare le vite future e per immaginare i tuoi desideri futuri per qu…
+- [ ] **MOD-162** (17:29) `[1 file]` — Cristallo del Collegamento Temporake del Portale del Seme Lemuriano
+- [ ] **MOD-163** (17:30) `[1 file]` — Cristallo del Guardiano dei Registri
+- [ ] **MOD-164** (17:31) `[1 file]` — Cristallo di quarzo dei collrgamenti temporali futuri
+- [ ] **MOD-165** (17:32) `[1 file]` — Cristallo di quarzo del generatore di aura dell'angelo
+- [ ] **MOD-166** (17:36) `[1 file]` — Dagli abusi energetici da sostituire con E per trovare il modo di liberarsi da Dominio e abusi
+- [ ] **MOD-167** (17:44) `[1 file]` — Lavora sul meccanismo che tiene in piedi la dipendenza, non sul sintomo da sostituire con Lavora come attivatore del "risveglio…
+- [ ] **MOD-168** (17:55) `[1 file]` — Non riguardano soli i legami affettivi ecc.. Sostituire la frase con: Non riguarda solo i legami affettivi: la nostra fiamma ge…
+- [ ] **MOD-169** (18:00) `[1 file]` — Sostituire collegamento temporale con: Accesso ad altre dimensioni
+- [x] **MOD-170** (18:08) `[2 file]` — Questa da sostituire con questa di seguito Con questa foto
+- [x] **MOD-171** (18:12) `[2 file]` — Questa foto da sostituire con la seguente Con questa
+- [x] **MOD-172** (18:15) `[2 file]` — Questa foto sostituirla con la seguente Con questa
+- [x] **MOD-173** (18:16) `[1 file]` — Quando clicco chi sono mi porta alla schermata del reiki alla seguente
+- [x] **MOD-174** (18:17) `[1 file]` — A questa mi riporta quando clicco chi sono
+- [x] **MOD-175** (18:19) `[2 file]` — Questa foto sostituirla con la seguente Con questa
+- [x] **MOD-176** (18:21) `[2 file]` — Questa sostituirla con la seguente foto Con questa
+- [ ] **MOD-177** (18:25) `[1 file]` — La frase non uso test la sostituiamo con Puo' ritenersi utile in alcuni casi l'uso di test e questionari
+- [ ] **MOD-178** (18:30) `[1 file]` — COSA TI MANDO dopo il colloquio ricevi la formula scritta: massimo 6 fiori scelti per te e la foto del codice lemuriano con la …
+- [ ] **MOD-179** (18:33) `[1 file]` — Quando si cambia formula: Quando uno stato si scioglie sostituire con: Quando uno stato emotivo cambia, il fiore che lo riguard…
+- [x] **MOD-180** (18:37) `[2 file]` — Questa foto sostituirla con la seguente E gli eventi fano e provincia principalmente ma anche in tutta italia
+- [ ] **MOD-181** (18:48) `[2 file]` — Questa foto sostituirla con la seguente
+- [ ] **MOD-182** (18:54) `[1 file]` — Sostituire con : dal percorso base di 5 sessioni fino al percorso five stars di 14 sessioni per la tua trasformazione completa …
+- [ ] 🎧 **MOD-183** (18:57) `[1 file]` — (solo allegato)
+- [x] **MOD-184** (18:59) `[1 file]` — Solo il primo colloquio di ogni percorso sara' di 60 min gli altri di 50 o 45 min Quindi mettere 60 invece che 50
+- [ ] **MOD-185** (19:19) `[1 file]` — Metodo non improvvisazione: (sistemare la frase con la seguente) ogni sessione ha la sua struttura: colloquio, trattamanto , co…
+- [x] **MOD-186** (19:20) `[2 file]` — Questa foto sostituirla con la seguente Con questa
+- [ ] **MOD-187** (19:23) `[1 file]` — Dove c'e' scritto un contatto a settimana via chat , rispondo entro 24 ore Aggiungere questa ultima frase
+- [ ] **MOD-188** (19:24) `[1 file]` — Nei percorsi i fiori di bach Aggiungere di bach ecc.. resto tutto uguale
+- [x] **MOD-189** (19:31) `[2 file]` — Questa foto da sostituire con la seguente Questa qui con quella sopra
+- [x] **MOD-190** (20:18) `[1 file]` — Quando clicco su inizia qui mi dice pagina non trovata: e' perche' ancora non ci sono giusto?
+- [x] **MOD-191** (20:19) `[1 file]` — Eventi in presenza Fano e provincia soprattutto ma anche il resto di Italia
+- [x] **MOD-192** (20:22) `[4 file]` — Qui nella newsletter possiamo mettere gli eventi del 27/9 , drl 11/10 e del ponte dei santi? Allego le locandine di seguito Ecc…
+- [x] **MOD-193** (20:34) `[2 file]` — Percorso arcobaleno sostituire la foto di lato con la seguente Con questa percorso arcobaleno
+- [x] **MOD-194** (20:36) `[1 file]` — Qui una domanda: come si trovano le 5 frasi , non trovo il modo per farle scorrere
+- [x] **MOD-195** (20:44) `[1 file]` — Scusate che non capisco ma qui perche' appaiono solo 4 percorsi in totale? Sotto contatti mi pare tutto lineare Sotto i percors…
+- [x] **MOD-196** (20:49) `[1 file]` — Guarda il percorso A posto di le
+- [x] **MOD-197** (20:56) `[1 file]` — Qui controllare i meccanismi perche ' quando clicco su CONFRONTA PERCORSI MI MANDA DA UN'ALTRA PARTE Ì percorsi sole e arcobale…
+- [x] **MOD-198** (20:58) `[1 file]` — Quando clicco sul come lavora mi esce la seguente schermata la metto a seguire
+- [x] **MOD-199** (21:00) `[1 file]` — Mi riesce di nuovo questa schermata QUINDI DA RIVEDERE E SISTEMARE I MECCANISMI
+- [x] **MOD-200** (21:02) `[1 file]` — Qui quando clicco su percorso oceano mi da la seguente schermata
+- [x] **MOD-201** (21:03) `[1 file]` — Questa del reiki Usui QUONDI RIVEDERE TUTTO IL MECCANISMO
+- [ ] **MOD-202** (21:14) `[2 file]` — Qui a fianco sostituire la foto con la seguente Con questa
+- [x] **MOD-203** (21:22) `[2 file]` — Foto dal primo al sesto da sostituire con questa Con questa quella dal primo al sesto
+- [x] **MOD-204** (21:28) `[2 file]` — Qui sostituire questa foto con la seguente Con questa
+- [x] **MOD-205** (21:30) `[1 file]` — Qui se clicco sui percorsi non mi da nulla , infatti non c'entra niente in questa riga i percorsi
+- [x] **MOD-206** (21:31) `[1 file]` — Sostituire ancorano con amplificano
+- [ ] **MOD-207** (21:37) `[1 file]` — Il reiki di Usui e' l'energia ecc.. Sostituire con Il reiki di Usui e' una tecnica giapponese che utilizza l'imposizione delle …
+- [x] **MOD-208** (21:42) `[1 file]` — Sostituire campo con corpo eterico
+- [x] **MOD-209** (21:42) `[1 file]` — Colloquio iniziale 60 min invece che 50
+- [ ] **MOD-210** (21:43) `[1 file]` — Sostituire cambia l'energia il modo di canalizzare non l'impegno
+- [x] **MOD-211** (21:45) `[2 file]` — Questa foto sostituire con la srguente Con questa
+- [ ] **MOD-212** (21:47) `[1 file]` — Sostituire corpo sottile con Si lavora su uno dei corpi sottili: sul corpo eterico
+- [x] **MOD-213** (21:49) `[2 file]` — Sostituire questa foto con questa a seguire
+- [ ] 🎧 **MOD-214** (21:51) `[1 file]` — (solo allegato)
+- [ ] **MOD-215** (21:55) `[1 file]` — Dove c'e' scritto non da un questinario aggiungere ma talvolta puo' tornare utile quando emergono molte problematiche contempor…
+- [ ] **MOD-216** (21:56) `[1 file]` — Sei massimo sono quelle che sevono a te , adesso ma possono essere anche meno
+- [x] **MOD-217** (21:58) `[2 file]` — Quando clicco qui non mi porta sul percorso sole ma alla sessione dei cristalli eterici come di seguito Ecco dove mi porta
+- [x] **MOD-218** (21:59) `[1 file]` — Qui confronta i percorsi mi porta qui a come funziona la sessione a distanza
+- [x] **MOD-219** (22:00) `[1 file]` — A questa
+- [x] **MOD-220** (22:01) `[1 file]` — Se clicco sul terzo anche qui mi appare un altra schermata questa di seguito
+- [ ] **MOD-221** (22:05) `[1 file]` — Come l'arcobaleno unisce.. corpe ecc . sostituire con Corpo mente e spirito e piano ed emozioni
+- [ ] **MOD-222** (22:11) `[1 file]` — Lavora sull' allineamento, purificazione ed equilibrio dei dei 7 chakra del tuo campo energetico ed emozionale e contemporaneam…
+- [ ] ℹ️ **MOD-223** (23:14) — Ciao Pasquale riesci a mandarmi url?
+- [ ] **MOD-224** (23:22) `[1 file]` — Sostituire .... riequilibriamo le emozioni con le essenze floreali: con. andiamo a lavorare sulle emozioni e sugli stati d'anim…
+- [x] **MOD-225** (23:27) `[1 file]` — Qui le 5 sessioni fiori di bach e 5 sessioni di reiki usui escono fuori dal rettangolo viola: da sistemare
+- [ ] **MOD-226** (23:38) `[1 file]` — Il reiki di Usui sostituire con: Il reiki promuove l'armonia a livello fisico mentale ed emotivo: aiuta a raggiungere un profon…
+- [ ] 🎧 **MOD-227** (23:41) `[1 file]` — (solo allegato)
+
+## 29/08
+
+- [ ] ℹ️ **MOD-228** (07:20) — Buongiorno Pasquale ti ho segnalato oltre alle modifiche tanti errori sul sito, si clicca e ti porta da un'altra parta ÌMPORTAN…
+- [ ] 🎧 **MOD-229** (09:08) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-230** (10:46) `[1 file]` — (solo allegato)
+- [x] **MOD-231** (16:40) — Alcuni elementi sono residui di un template non ancora personalizzato: meta-description che parlano di "yoga teachers", il tito…
+- [ ] **MOD-232** (16:41) — Un po' tutto da rivedere......per sabato prossimo riesci a consegnarmelo tutto sistemato?????
+- [x] **MOD-233** (17:08) — E molti clic indirizzano a pagine sbagliate.. E ci sono frasi sovrapposte che non si riescono a leggere..
+- [ ] **MOD-234** (18:53) `[1 file]` — Sostituire nel sole la parte energetica..con Nel sole canalizziamo l'energia con il Reiki di Atlantide, qui con il reiki di Usu…
+- [x] **MOD-235** (19:01) `[1 file]` — Colloquio iniziale di 60 anziche' 50 Ti ascolto, mi racconti come ti senti, cosa senti, per definire l'intento del percorso. In…
+- [x] **MOD-236** (19:07) `[1 file]` — Qui sostituire con la foto nuova del percorso sole che avete trovato nelle chat precedenti
+- [ ] **MOD-237** (19:13) `[1 file]` — Sostituire la parola attivo con:. ti spiego il codice o i codici lemuriani piu' adatti a te di cui ti invio.... resta tutto uguale
+- [x] **MOD-238** (19:13) `[2 file]` — Qui sostituire la foto con la seguente
+- [ ] **MOD-239** (19:19) `[1 file]` — Dopo percorso Sole , la virgola
+- [ ] **MOD-240** (19:22) `[1 file]` — 929 anziche' 990 per la prima sessione online di 60 min, compreso il colloquio iniziale, piu' 9 sessioni da 50 min ecc..resto t…
+- [x] **MOD-241** (19:26) `[2 file]` — Quando si presenta questa schermata sostituire la foto delle candele con la seguente
+- [x] **MOD-242** (19:28) — Aggiungere che tutti i percorsi dai piu piccoli ai piu' grandi hanno un sigillo
+- [x] **MOD-243** (19:35) `[1 file]` — Sostituire la parola ancoraggio con consolidamento: Purificare, sbloccare, equilibrare, amplificare, potenziare e sigillare res…
+- [ ] **MOD-244** (19:36) `[1 file]` — Mettere la foto con l'oro che va ogni volta che parliamo di percorso gold
+- [ ] **MOD-245** (19:37) `[1 file]` — Qui rimettere rimettere le parole di sopra tali e quali: purificare, equilibrare, potenziare ecc..
+- [x] **MOD-246** (19:40) `[1 file]` — Invece che tre blocchi di lavoro tre moduli di lavoro piu' bonus finale Ogni volta che appare tre blocchi di lavoro sostituismo…
+- [ ] **MOD-247** (19:43) `[1 file]` — Sostituire riequilibriamo con armonizziamo le risposte emotive e attiviamo la guarigione ecc...
+- [ ] **MOD-248** (19:50) `[1 file]` — Ad ogni sessione attivo una griglia di cristalli sopra un pannello di geometria sacra rappresentante il tuo corpo eterico per a…
+- [x] **MOD-249** (19:51) — Ogni volra che troviamo portale di legno sostituire con pannello di geometria sacra
+- [x] **MOD-250** (19:52) — Ogni volta che trovo colloquio iniziale sostituire con 60 min invece che 50
+- [ ] 🎧 **MOD-251** (20:49) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-252** (20:55) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-253** (20:58) `[1 file]` — (solo allegato)
+- [x] **MOD-254** (21:01) `[1 file]` — 60 al posto di 50 6 intenti di cristalli eterici 9 sessioni da 50 (scritto 2 volte)
+- [ ] 🎧 **MOD-255** (21:08) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-256** (21:10) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-257** (21:17) `[1 file]` — (solo allegato)
+- [ ] **MOD-258** (21:22) `[1 file]` — Percorso gold : foto sostituire con la seguente
+- [ ] **MOD-259** (21:23) `[1 file]` — Gold
+- [ ] 🎧 **MOD-260** (21:29) `[1 file]` — (solo allegato)
+- [ ] **MOD-261** (21:34) `[1 file]` — Sostituire" con attivazione energetica" Con consacrazione del lavoro fatto tramita il sigillo della Luce Diamantina per stabili…
+- [x] **MOD-262** (21:34) `[2 file]` — Foto del bonus da sostituire con la seguente Con questa
+- [ ] **MOD-263** (22:12) `[1 file]` — Invece che purifica le emozioni sostituire con: armonizzare gli stati d'animo, purificare l'aura, schermarsi e manifestare una …
+- [x] **MOD-264** (22:19) `[2 file]` — Sostituire la foto premium con la srguente Con questa
+- [ ] **MOD-265** (22:20) `[1 file]` — Vedi come ho messo sopra
+- [ ] **MOD-266** (22:21) — Invece che purifica le emozioni sostituire con: armonizzare gli stati d'animo, purificare l'aura, schermarsi e manifestare una …
+- [ ] **MOD-267** (22:24) `[1 file]` — Purificazione e memoria dell'anima sostituire con Arminizzazione e attivazione energetica
+- [ ] **MOD-268** (22:33) `[1 file]` — Fiori di bach personalizzati per bilanciare le reazioni emotive piu' codice lemuriano di attivazione per accedere a memorie del…
+- [ ] **MOD-269** (22:35) `[1 file]` — Ricarica e protezione sostituire con canalizzazione e protezione
+- [x] **MOD-270** (22:38) `[1 file]` — Su portale di legno sostituire con pannello di geometria sacra
+- [ ] **MOD-271** (22:52) `[1 file]` — Fase 3 in ogni sessione fissiamo l'energia di 3 pilastri eterici ( 3 intenti ) specifici per te per un totale di 9 intenti scel…
+- [ ] **MOD-272** (22:59) `[1 file]` — Ti riporta al centro per radicare la tua coscienza nello spazio sacro del cuore. Piu una sessione bonus di 30 min per onorare e…
+
+## 30/08
+
+- [ ] **MOD-273** (19:11) `[1 file]` — (solo allegato)
+- [x] **MOD-274** (19:12) `[1 file]` — Questa foto nel percorso five stars da sostituire con la seguente
+- [ ] **MOD-275** (19:20) `[1 file]` — Titolo five stars sostituire trasformazione totale con: Il cerchio dell'evoluzione: trasformazione e manifestazione in 14 sessi…
+- [ ] **MOD-276** (19:22) `[1 file]` — Sostituire il five stars ecc.. con Un viaggio in 14 tappe per liberare il passato, proteggere il presente, co-creare il futuro …
+- [ ] **MOD-277** (19:26) `[1 file]` — Sostituire con le 3 fasi -Onorare il passato -custodire il proprio spazio sacro -tessere la realta' della tua anima 14 sessioni…
+- [ ] **MOD-278** (19:37) `[1 file]` — Prima fase five stars sostituire purificazione e memoria drll'anima con Liberazione emozionale e sintonizzazione con la saggezz…
+- [ ] **MOD-279** (19:44) `[1 file]` — Five stars ricarica e protezione sostituire con: Rigenerazione vibrazionale e schermatura sottile. Due sessioni a settimana 45 …
+- [ ] **MOD-280** (19:53) `[1 file]` — five stars sostituire con: Utilizzo le frequenze sottili dei cristalli a livello eterico per ancorare stabilita' gioia e prospe…
+- [x] **MOD-281** (19:59) `[2 file]` — Sostituire foto sigillo stella cometa nel five stars con la srguente
+- [ ] **MOD-282** (20:07) `[1 file]` — Sigillo della stella cometa: Fa scendere ecc..sostituire la frase con: La frequenza sacra della stella cometa agisce come un ca…
+- [ ] **MOD-283** (20:10) `[1 file]` — Sessione bonus: sostituire tutta la frase con: 30 min post percorso per fare il punto della situazione
+- [ ] **MOD-284** (20:13) `[1 file]` — In seguenza Prima Gli 11 intenti: frase uguale La sessione bonus: vedi sopra Sigillo della stella cometa Il contatto
+- [ ] **MOD-285** (20:16) `[1 file]` — Riassunto five stars: 5 sessioni fiori con codici 5 sessioni del reiki scelto, 4 sessioni cristalli eterici con tutti gli 11 in…
+- [x] **MOD-286** (20:31) `[3 file]` — Se preferisci provare prima sostituire la foto con la seguente
+- [ ] **MOD-287** (21:00) `[1 file]` — Five stars: eliminare questa frase
+- [x] **MOD-288** (21:19) `[1 file]` — Sostituire questa foto con la seguente Per il colloquio iniziale
+- [x] **MOD-289** (21:31) `[1 file]` — Facebook instagram tiktok Da togliere you tube e linkedin
+- [x] **MOD-290** (21:43) `[1 file]` — Email laralaprova@gmail.com
+- [x] **MOD-291** (21:44) `[1 file]` — Social instagram facebook e tik tok
+- [x] **MOD-292** (21:45) `[2 file]` — Questa in bianco e nero sostituirla con la seguente
+- [x] **MOD-293** (21:47) `[1 file]` — Mettere solo una di queste solo viso togliere l'altra in bianco e nero
+- [x] **MOD-294** (21:48) — E aggiungere questa negli scatti dove ci sono io IL VOLTO DIETRO L'ALCHIMIA
+
+## 31/08
+
+- [ ] **MOD-295** (09:20) `[1 file]` — (solo allegato)
+- [ ] 🎧 **MOD-296** (11:27) `[1 file]` — (solo allegato)
+- [ ] **MOD-297** (13:00) `[2 file]` — Sostituire la parola attivo con:. ti spiego il codice o i codici lemuriani piu' adatti a te di cui ti invio.... resta tutto uguale
+- [ ] ℹ️ **MOD-298** (13:10) — STO SISTEMANDO SOLO LE FOTO TESTI NON MODIFICO ANCORA CONFERMO QUELLI MODIFICATI SOPRA
+- [ ] **MOD-299** (13:49) `[1 file]` — (solo allegato)
+- [x] **MOD-300** (13:52) `[1 file]` — Percorso gold
+- [x] **MOD-301** (14:05) `[3 file]` — Mettere la foto con l'oro che va ogni volta che parliamo di percorso gold quella sopra con oro e meditazione
+- [x] **MOD-302** (14:13) `[1 file]` — Quando si presenta questa schermata sostituire la foto delle candele con quella sopra che c'e' scritto prenotare tramite social…
+- [x] **MOD-303** (14:31) `[1 file]` — Qui e' giusto solo quello centrale Il primo REIKI ENERGIA DAL MARE la frequenza di atlantide Il testo ok Rwiki energia dal mare…
+- [ ] **MOD-304** (14:32) — PASQUALE CI SONO MOLTI ERRORI TI TESTO SCAMBIATI MENO MALE CHE ME LO RIVEDO PIANO PIANO
+- [ ] **MOD-305** (14:37) `[1 file]` — dove dice per la meditazione finale e l'integrazione e codice lemuriano dove previsto. Nei percorsi trovi il bonus ed il sigill…
+- [x] **MOD-306** (15:06) `[1 file]` — Questa da sostituire con la foto della schermata successiva
+- [x] **MOD-307** (15:07) `[2 file]` — Qui sostituire la foto con la foto sopra Ecco dove mi porta
+- [x] **MOD-308** (15:16) `[1 file]` — Sostituire la foto della schermata di sopra fatta da voi ( cristallo viola )con questa mia sopra
+- [x] **MOD-309** (15:19) `[3 file]` — Questa foto sostituirla con la seguente
+- [ ] **MOD-310** (17:39) `[1 file]` — Questa foto di questa schermata la cambio con quella sopra
+- [x] **MOD-311** (17:50) `[3 file]` — Questa sostituirla con la foto sopra
+- [x] **MOD-312** (17:55) `[3 file]` — In questa schermata mettere la foto sopra
+- [x] **MOD-313** (18:02) — Questa foto del percorso oceano sostituirla con quella sopra La foto del percorso oceano non quella della cristalloterapia
+- [ ] **MOD-314** (18:27) `[1 file]` — (solo allegato)
+- [ ] **MOD-315** (18:27) `[3 file]` — Sigillo della stella cometa: Fa scendere ecc..sostituire la frase con: La frequenza sacra della stella cometa agisce come un ca…
+- [x] **MOD-316** (18:32) `[1 file]` — Questa foto e' da sostituire con la foto della schermata sopra sigillo della luce diamantina
+- [x] **MOD-317** (18:38) `[1 file]` — Mettere la foto sopra in questa schermata Sessione online
+- [ ] **MOD-318** (18:53) `[1 file]` — (solo allegato)
+- [x] **MOD-319** (18:53) `[1 file]` — Questo nel percorso sole Ecco quella da sostituire
+- [x] **MOD-320** (18:54) — Ecco la foto del percorso sole da sostituire con questa
+- [ ] **MOD-321** (19:05) `[1 file]` — (solo allegato)
+- [x] **MOD-322** (19:21) `[1 file]` — Questa foto del percorso stella sostituire con quello della schermata sopra
+- [x] **MOD-323** (19:22) `[2 file]` — Se possibile mettere la freccetta anche nel sigillo del ritorno al cuore e della stella cometa ma la foto col sigillo di luce n…
+- [ ] **MOD-324** (19:26) `[1 file]` — MASTER CRISTALLOTERAPIA trattamenti di cristalloterapia eterica a distanza
+- [ ] **MOD-325** (19:26) `[1 file]` — Questa da sostituire con quella fatta da me master in cristalloterapia
+- [ ] **MOD-326** (19:30) `[1 file]` — Percorso arcobaleno sostituire la foto di lato con la seguente
+- [x] **MOD-327** (19:37) `[1 file]` — Questa foto metterla nella schermata sopra dove parliamo del percorso arcobaleno
+- [x] **MOD-328** (19:39) `[1 file]` — Qui nella newsletter possiamo mettere gli eventi del 27/9 , drl 11/10 e del ponte dei santi? Allego le locandine di seguito
+- [x] **MOD-329** (19:42) — Foto-5.pdfdocumento omesso
+- [x] **MOD-330** (19:45) — Foto-2.pdfdocumento omesso
+- [x] **MOD-331** (19:49) — Foto.pdfdocumento omesso
+- [x] **MOD-332** (20:08) `[2 file]` — A posto di questa foto mettere la seguente
+- [x] **MOD-333** (20:12) `[2 file]` — La foto di questa schermata sostituirla con la srguente
+- [x] **MOD-334** (20:22) `[2 file]` — Sostituire questa foto con la srguente
+- [x] **MOD-335** (20:35) `[2 file]` — Sostituire questa foto in questa schermata del percorso arcobaleno con la seguente
+- [x] **MOD-336** (20:39) `[1 file]` — Il logo del Movimemto delle libere discipline naturali di cui sono socio benemerito dove si trova? E' importante perche' risult…
+- [x] **MOD-337** (20:44) `[2 file]` — Sostituire con questa foto
+- [x] **MOD-338** (20:44) — Sostituire con questa resta aggiornata
+- [ ] **MOD-339** (20:58) `[2 file]` — Come si svolge la sessione nel percorso gold sostituire con la seguente foto
+- [x] **MOD-340** (21:01) `[1 file]` — Questo di ritorno al cuore nel percorso premium
+- [x] **MOD-341** (21:20) `[3 file]` — questa sostituire con la foto sopra io con i fiori
+- [x] **MOD-342** (21:32) `[3 file]` — Questa sostituire con la foto sopra
+- [x] **MOD-343** (21:35) — Questa del sigillo del cuore sostituirla con quella sopra
+- [ ] **MOD-344** (21:49) `[1 file]` — Questa metterla al posto drlla seguente
+- [ ] **MOD-345** (21:52) `[1 file]` — Scrivere sotto CODICI LEMURIANI Esperienza
+- [x] **MOD-346** (22:02) `[1 file]` — Questa foto dei chakra da sostiruire con la seguente
+- [x] **MOD-347** (22:02) `[1 file]` — Questa dei chakra da mettere al posto di quella sopra
+- [x] **MOD-348** (22:13) `[3 file]` — Questa foto corpo eterico e' da sostituire con quella dell'omino sopra con il corpo celeste attorno
+- [x] **MOD-349** (22:25) `[2 file]` — Questa foto da sostituire con quella sopra
+- [ ] **MOD-350** (22:29) `[1 file]` — Questa sostituirla con quella sopra
+- [x] **MOD-351** (22:39) `[2 file]` — Questa foto di questa schermata sostituirla con quella sopra
+- [x] **MOD-352** (22:42) `[1 file]` — Questi sono i conttati da inserire e cancellare linkedin e you tube
+- [ ] ℹ️ **MOD-353** (22:44) — CIAO PASQUALE FINITO TUTTO!!! 3 ORE AL GIORNO CI HO MESSO 18 ORE OER MODIFICARLO METTETECI TUTTO IL TEMPO CHE VOLETE
+- [ ] 🎧 **MOD-354** (22:44) `[1 file]` — (solo allegato)
+
+## 01/09
+
+- [x] **MOD-355** (19:58) — Ciao Pasquale ricordati di far aggiustare le pagine del sito con residui di template ( descrizioni sbagliate e link rotti, nomi…
+
+## 03/09
+
+- [ ] **MOD-356** (19:48) — Ciao Pasquale come va? Mi sono accorta che non ti avevo inviato nel materiale per il sito IL PERCORSO SILVER E IL PERCORSO LUNA…
+- [ ] 📎 **MOD-357** (19:50) `[1 file]` — (solo allegato)
+- [ ] 📎 **MOD-358** (19:51) `[1 file]` — (solo allegato)
+
+## 04/09
+
+- [ ] 🎧 **MOD-359** (09:21) `[1 file]` — (solo allegato)
+
+## 06/09
+
+- [x] ℹ️ **MOD-360** (12:47) — CIAO PASQUALE BUONGIORNO! COME STAI? HAI TROVATO QUALCUNO CHE PUO' FINIRMI IL SITO? IERI SONO FINALMENTE RIUSCITA A VENDERE IL …
+- [ ] ℹ️ **MOD-361** (15:11) — Fantastico!!!!! Digli per cortesia entro il 20 cosi faccio stampare i volantini che sto aspettando di inserire il sito🤞🍀🌈❤️
