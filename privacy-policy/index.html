@@ -76,247 +76,7 @@ html {scroll-behavior: smooth}:root {--min-viewport: 360;--max-viewport: 1600;--
 <script id="jquery-migrate-js" src="/assets/vendor/jquery/jquery-migrate.js"></script>
 
 
-<script type='text/javascript'>// Objeto global para almacenar datos de la ubicación seleccionada
-let placeData = {};
-// Bandera para saber si se ha seleccionado un lugar válido del Autocomplete
-let placeSelected = false;
-
-console.log("test-script: Script iniciado (Hybrid Strategy: City=Standard, Country=Wide)");
-
-// 1) Inicializa el autocomplete de Google y guarda datos en placeData
-function initAutocomplete() {
-    const input = document.getElementsByName('form-field-19d589')[0];
-    if (!input) {
-        console.warn('initAutocomplete: Input con name="form-field-19d589" no encontrado.');
-        return;
-    }
-
-    input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            const pacContainer = document.querySelector('.pac-container');
-            if (pacContainer && pacContainer.style.display !== 'none') {
-                 console.log('Enter presionado en Autocomplete, previniendo submit.');
-                 event.preventDefault();
-            }
-        }
-    });
-
-    input.addEventListener('input', () => {
-        if (placeSelected) {
-            console.log('Input cambiado manualmente después de selección, reseteando.');
-            placeSelected = false;
-        }
-    });
-
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-        // types: ['(cities)'] // IMPORTANTE: Comentado para permitir seleccionar países
-    });
-
-    autocomplete.addListener('place_changed', () => {
-        placeSelected = false;
-        const place = autocomplete.getPlace();
-
-        if (!place.geometry || !place.geometry.location || !place.formatted_address) { 
-            console.warn('Autocomplete: No se obtuvo información geográfica completa.', place);
-            return;
-        }
-
-        const comps = place.address_components || []; 
-        const getComp = type => {
-            const c = comps.find(x => x.types.includes(type));
-            return c && c.long_name ? c.long_name : '';
-        };
-
-        // --- Inicio: Lógica de Parsing ---
-        let parsedCity = '';
-        let parsedState = '';
-        const addressString = place.formatted_address;
-        const parts = addressString.split(',').map(part => part.trim()); 
-
-        if (parts.length >= 1) {
-            parsedCity = parts[0]; 
-        }
-        if (parts.length >= 2) {
-             parsedState = parts[1];
-        }
-        // --- Fin: Lógica de Parsing ---
-
-        placeData = {
-            googleAddress: place.formatted_address,
-            latitude:      place.geometry.location.lat(),
-            longitude:     place.geometry.location.lng(),
-            street:        [getComp('street_number'), getComp('route')]
-                           .filter(Boolean).join(' ').trim() || '',
-            city:          parsedCity,
-            state:         parsedState,
-            country:       getComp('country'),
-            // Guardamos tipos para distinguir País vs Ciudad
-            types:         place.types || [] 
-        };
-
-        if (placeData.googleAddress && typeof placeData.latitude === 'number') {
-             placeSelected = true;
-             console.log('Datos de lugar actualizados:', placeData);
-             console.log('Tipos detectados:', placeData.types);
-        } else {
-             console.warn('Datos de lugar incompletos:', placeData);
-        }
-    });
-    console.log("initAutocomplete: Autocomplete inicializado.");
-}
-
-// 2) IDs de formulario → tipo
-const formConfig = {
-    'brxe-87f2ed': 'School',
-    'brxe-eeamfb': 'Teacher',
-    'brxe-nivkin': 'Co-Ed'
-};
-
-// 3) Engancha el listener (ESTRATEGIA HÍBRIDA)
-function ai_attachForm(form, type) {
-    if (form.dataset.aiFormAttached) return;
-    form.dataset.aiFormAttached = 'true';
-    console.log(`ai_attachForm: Enganchando listener a ${form.id} (tipo: ${type})`);
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log('Validaciones pasadas. Recolectando datos.');
-
-        const locationRaw    = form.querySelector('[name="form-field-19d589"]')?.value.trim() || '';
-        const nameRaw        = form.querySelector('[name="form-field-4c3b84"]')?.value.trim() || '';
-        const designationRaw = form.querySelector('[name="form-field-vnpybv"]')?.value.trim() || '';
-        const designation    = designationRaw.split(':')[0].replace(/®/g, '').trim();
-
-        const googleAddressVal = placeData.googleAddress;
-        const latitudeVal      = placeData.latitude;
-        const longitudeVal     = placeData.longitude;
-        let streetVal          = placeData.street || '';
-
-        if (streetVal === '') {
-            streetVal = ' ';
-        }
-
-        const countryVal = placeData.country || '';
-
-        // --- LÓGICA DE DECISIÓN (HÍBRIDA) ---
-        let radiusValue = 50; 
-        let finalLocation = placeData.city || '';   // Por defecto enviamos Ciudad
-        let finalState    = placeData.state || '';  // Por defecto enviamos Estado
-        
-        const placeTypes = placeData.types || [];
-
-        // CASO 1: ES UN PAÍS (Ej: USA, Chile)
-        if (placeTypes.includes('country')) {
-            radiusValue = 200;
-            // IMPORTANTE: Para países, borramos location y state. 
-            // Esto obliga al sistema a usar solo las coordenadas y el radio amplio.
-            finalLocation = '';
-            finalState = '';
-            console.log("--> MODO PAÍS DETECTADO: Radius 200, Location/State limpiados.");
-        } 
-        // CASO 2: ES CIUDAD / PUEBLO (Default)
-        else {
-            radiusValue = 50;
-            // IMPORTANTE: Para ciudades, mantenemos el nombre de la ciudad y el estado.
-            // Esto ayuda a que el sistema "entienda" que queremos resultados locales estrictos.
-            console.log("--> MODO CIUDAD DETECTADO: Radius 50, Enviando Location/State.");
-        }
-
-        const params = [
-            `type=${encodeURIComponent(type)}`,
-            `keyword=${encodeURIComponent(nameRaw)}`,
-            `designation=${encodeURIComponent(encodeURIComponent(designation))}`,
-            `googleAddress=${encodeURIComponent(encodeURIComponent(googleAddressVal))}`,
-            `latitude=${latitudeVal}`,
-            `longitude=${longitudeVal}`,
-            `street=${encodeURIComponent(encodeURIComponent(streetVal))}`,
-            
-            // Usamos las variables decididas arriba (Vacías si es país, Llenas si es ciudad)
-            `location=${encodeURIComponent(finalLocation)}`, 
-            `state=${encodeURIComponent(finalState)}`,    
-            
-            `country=${encodeURIComponent(encodeURIComponent(countryVal))}`,
-            
-            // Parámetros de radio
-            `searchRadius=${radiusValue}`,
-            `radius=${radiusValue}`, 
-            
-            `locationinput=${encodeURIComponent(encodeURIComponent(googleAddressVal))}`
-        ];
-
-        const base = 'index.html';
-        const url  = `${base}?${params.join('&')}`;
-
-        console.log(`--- URL FINAL GENERADA ---`);
-        console.log(url);
-
-        console.log('Redirigiendo a:', url);
-        window.location.href = url;
-
-        const submitButton = form.querySelector('[type="submit"]');
-        if (submitButton) {
-            submitButton.disabled = true;
-            setTimeout(() => { submitButton.disabled = false; }, 3000);
-        }
-    });
-}
-
-// 4) Escanea el DOM por los formularios configurados
-function scanForForms() {
-    Object.entries(formConfig).forEach(([id, type]) => {
-        const form = document.getElementById(id);
-        if (form && !form.dataset.aiFormAttached) {
-            ai_attachForm(form, type);
-        }
-    });
-}
-
-// 5) Observador de mutaciones
-function startObserver() {
-    if (!window.MutationObserver) return;
-    const observer = new MutationObserver((mutationsList, observerInstance) => {
-        scanForForms();
-        const allAttached = Object.keys(formConfig)
-            .every(id => {
-                const form = document.getElementById(id);
-                return form && form.dataset.aiFormAttached === 'true';
-            });
-        if (allAttached) {
-            observerInstance.disconnect();
-        }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-}
-
-// 6) Polling de respaldo
-function startPolling() {
-    let attempts = 0;
-    const maxAttempts = 20;
-    const interval = setInterval(() => {
-        attempts++;
-        scanForForms();
-        const allAttached = Object.keys(formConfig)
-            .every(id => {
-                 const form = document.getElementById(id);
-                 return form && form.dataset.aiFormAttached === 'true';
-             });
-        if (allAttached || attempts >= maxAttempts) {
-            clearInterval(interval);
-        }
-    }, 500);
-}
-
-// 7) Inicialización
-window.addEventListener('load', () => {
-    console.log('window.load: Iniciando script (Estrategia Híbrida)...');
-    initAutocomplete();
-    scanForForms();
-    startObserver();
-    startPolling();
-});
-</script><style type='text/css'>
+<style type='text/css'>
 #brx-header {
     z-index: 999;
 }
@@ -702,58 +462,7 @@ summary {
 body:not(.home) #brxe-8d35ec {
  color: #033944!important;
 }
-</style>        <style id="ya-login-styles">
-            .ya-user-wrapper{
-                position:relative;
-                display:inline-block;
-                font-weight:600;
-            }
-            .ya-user-toggle{
-                display:inline-flex;
-                align-items:center;
-                gap:.4em;
-                padding:.35rem .75rem;
-                border-radius:6px;
-                cursor:pointer;
-                transition:background .25s ease, backdrop-filter .25s ease;
-                position:relative;
-                z-index:20;
-                text-decoration:none;
-                color:inherit;
-            }
-            .ya-user-toggle .menu-item-icon{
-                width:.75em;
-                height:.75em;
-                transition:transform .25s ease;
-            }
-            .ya-user-wrapper:hover .menu-item-icon{transform:rotate(180deg);}
-            .ya-user-wrapper:hover .ya-user-toggle{
-                background:rgba(255,255,255,.3);
-                backdrop-filter:blur(4px);
-            }
-            .ya-user-dropdown{
-                position:absolute;
-                top:100%;
-                left:0;
-                min-width:120px;
-                background:rgba(255,255,255,.9);
-                backdrop-filter:blur(4px);
-                border-radius:6px;
-                padding:.35rem 0;
-                display:none;
-                z-index:10;
-                box-shadow:0 4px 16px rgba(0,0,0,.07);
-            }
-            .ya-user-wrapper:hover .ya-user-dropdown{display:block;}
-            .ya-logout-link{
-                display:block;
-                padding:.5rem .9rem;
-                white-space:nowrap;
-                text-decoration:none;
-                color:inherit;
-            }
-            .ya-logout-link:hover{background:rgba(0,0,0,.05);}
-        </style>
+</style>        
     <link rel="icon" href="/assets/logo-sibilo-dark.svg" />
 <link rel="icon" href="/assets/logo-sibilo-dark.svg" />
 <link rel="apple-touch-icon" href="/assets/logo-sibilo-dark.svg" />
@@ -1324,6 +1033,79 @@ if(t&&t.tagName==='IMG'){t.classList.add('clone-missing');t.removeAttribute('src
 }
 </style>
 <style id="ai-fix-layout">
+/*mob-nav*/
+.aim__mob{display:none}
+/*hdr*/
+#brx-header:not(.brx-sticky){position:sticky!important;top:0;z-index:1000}
+#brx-header>section:first-child{padding-top:12px!important;padding-bottom:12px!important}
+#brx-header .ais__i{padding:8px 0}
+#brx-header .ais__b{width:38px;height:38px}
+#brx-header .ais__f{padding-top:4px;padding-bottom:4px}
+.menu-stickiness.brxe-section{top:var(--ai-hdr,0px)!important}
+html{scroll-padding-top:calc(var(--ai-hdr,0px) + 72px)}
+#brx-header .brxe-container:has(#aiMenu){display:flex!important;align-items:center!important;justify-content:space-between!important;column-gap:clamp(12px,1.6vw,28px)!important;flex-wrap:nowrap!important;padding-left:clamp(18px,3.5vw,50px)!important;padding-right:clamp(18px,3.5vw,50px)!important}
+#brx-header .brxe-container:has(#aiMenu)>*{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+#brx-header .brxe-container:has(#aiMenu)>:first-child{flex:0 0 auto;width:clamp(118px,10vw,158px)!important}
+#brx-header .brxe-container:has(#aiMenu)>:first-child{position:relative}
+#brx-header .brxe-container:has(#aiMenu)>:first-child .brxe-logo{width:100%!important;display:block}
+#brx-header .brxe-container:has(#aiMenu)>:first-child .brxe-logo.white-logo{position:absolute!important;left:0!important;top:50%!important;transform:translateY(-50%);right:auto!important}
+#brx-header .brxe-container:has(#aiMenu)>:first-child img{width:100%!important;height:auto!important}
+#brx-header .brxe-block:has(> .brxe-nav-menu > #aiMenu){flex:1 1 auto;min-width:0;justify-content:center!important}
+#brx-header .brxe-block:has(#aiSearch){flex:0 0 auto;column-gap:clamp(10px,1.2vw,20px)!important}
+#brx-header .brxe-block:has(#aiSearch)>*{max-width:none!important}
+@media (min-width:1181px){
+ .aim__b{font-size:clamp(15px,1.2vw,18px);padding:10px clamp(7px,.85vw,16px)}
+ #brx-header .ais__f{min-width:0!important;width:clamp(160px,15vw,270px);padding-left:16px}
+ .aim__p--wide{min-width:min(900px,calc(100vw - 60px))}
+}
+@media (min-width:992px) and (max-width:1180px){
+ #brx-header .ais__f{min-width:0!important;width:230px}
+ #brx-header .brxe-container:has(#aiMenu)>:first-child{margin-right:auto!important}
+ #brx-header .brxe-block:has(> .brxe-nav-menu > #aiMenu){flex:0 0 auto;order:5}
+}
+/*/hdr*/
+img.brxe-image[data-src^="data:image/svg"]{display:none!important}
+@media (max-width:1180px){
+ .aim:not([data-mob="1"]) .aim__wrap{box-shadow:none;visibility:hidden;transition:transform .34s cubic-bezier(.2,.7,.3,1),visibility 0s linear .34s}
+ .aim[data-mob="1"] .aim__wrap{visibility:visible}
+ .aim__wrap,.aim__wrap .aim__b{color:#3b2456!important}
+}
+@media (max-width:991px){
+ #brx-header .brxe-block:has(> .brxe-nav-menu > #aiMenu){display:flex!important;width:auto!important;justify-content:flex-end!important;justify-self:end}
+ #brx-header .brxe-div:has(> .brxe-coreburguer){display:none!important}
+ #brx-header section:has(> .menu-home-internal){display:none!important}
+ .aim__burger{margin-right:-10px}
+ .aim__wrap .ais{margin:0 0 14px;font-size:16px}
+ .aim__wrap .ais__f{min-width:0;width:100%}
+ .aim__wrap .ais__r{position:static;width:100%;box-shadow:none;margin-top:10px;max-height:none}
+ .aim__mob{display:flex;flex-direction:column;align-items:stretch;gap:12px;margin-top:28px}
+ .aim__mob .aim__cta{justify-content:center}
+}
+.brxe-cuxwbh{height:auto!important;flex:1 0 auto;display:flex;flex-direction:column}
+.brxe-cuxwbh>.next-inverted-corner__inner{height:auto!important;flex:1 0 auto;display:flex;flex-direction:column}
+.brxe-cuxwbh .next-inverted-corner__box{height:auto!important;flex:1 0 auto;display:flex;flex-direction:column}
+.brxe-cuxwbh .next-inverted-corner__content-wrapper{position:relative!important;inset:auto!important;height:auto!important;flex:1 0 auto}
+@media (min-width:768px) and (max-width:991px){*:has(> .brxe-cuxwbh){aspect-ratio:auto!important;min-height:calc((100vw - 70px)*.6)}}
+@media (min-width:479px){.brxe-cuxwbh .next-inverted-corner__content-wrapper>div{padding-top:max(5%,28px);padding-bottom:max(5%,28px)}}
+@media (min-width:768px) and (max-width:1023px){#brxe-edad1b{flex-wrap:wrap;row-gap:36px;padding-left:40px;padding-right:40px}#brxe-edad1b>*{flex:1 1 calc(50% - 30px);min-width:0}}
+.bc-arrow-button__title{text-transform:none!important}
+.bc-arrow-button__title::first-letter{text-transform:uppercase}
+@media (max-width:767px){.timeline-cards--title.brxe-heading{font-size:min(90px,16vw)!important;overflow-wrap:normal}}
+/*/mob-nav*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* I link che avvolgono un intero blocco (es. l'hero dei percorsi, cliccabile verso
    la panoramica) ereditavano la sottolineatura globale degli <a> e la passavano a
    titolo e testo. Qui resta il link, sparisce la riga. */
@@ -1336,81 +1118,13 @@ a.brxe-block:hover,a.brxe-container:hover,a.brxe-div:hover{text-decoration:none}
 <body class=" page-template-default page page-id-3106 page-child parent-pageid-2259 brx-body bricks-is-frontend">		<a class="skip-link" href="#brx-content">Vai al contenuto</a>
 
 					<a class="skip-link" href="#brx-footer">Vai al footer</a>
-			<header id="brx-header"><section id="brxe-ranlum" class="brxe-section bricks-lazy-hidden"><div id="brxe-vwewum" class="brxe-container brx-grid bricks-lazy-hidden"><div id="brxe-evxmdw" class="brxe-block bricks-lazy-hidden"><a id="brxe-huwagy" class="brxe-logo" href="/"><img width="501" height="155" src="/assets/logo-sibilo-dark.svg" class="bricks-site-logo css-filter" alt="Alchimia Interiore" loading="eager" decoding="async" fetchpriority="high" /></a><a id="brxe-kgueul" class="brxe-logo white-logo" href="/"><img width="501" height="155" src="/assets/logo-sibilo-white.svg" class="bricks-site-logo css-filter" alt="Alchimia Interiore" loading="eager" decoding="async" /></a></div><div id="brxe-favlzb" class="brxe-block bricks-lazy-hidden"><div id="brxe-cbuolq" data-script-id="cbuolq" class="brxe-nav-menu"><div class="aim" id="aiMenu"><button class="aim__burger" type="button" id="aiBurger" aria-label="Apri il menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="aim__scrim" id="aiScrim"></div><div class="aim__wrap"><button class="aim__close" type="button" id="aiClose" aria-label="Chiudi il menu">×</button><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Percorsi <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Da 5 sessioni</p><div class="aim__l"><a href="/percorso-oceano/"><span style="flex:1"><b>Percorso Oceano</b><span>Reiki Energia dal Mare</span></span><i>€ 539 <s class="ai-was">€ 599</s></i></a><a href="/percorso-stella/"><span style="flex:1"><b>Percorso Stella</b><span>Reiki Usui e Cristalloterapia</span></span><i>€ 539 <s class="ai-was">€ 599</s></i></a></div></div><div><p class="aim__ct">Da 10 incontri</p><div class="aim__l"><a href="/percorso-sole/"><span style="flex:1"><b>Percorso Sole</b><span>Fiori e Reiki dal Mare</span></span><i>€ 1.119 <s class="ai-was">€ 1.189</s></i></a><a href="/percorso-arcobaleno/"><span style="flex:1"><b>Percorso Arcobaleno</b><span>Fiori e Reiki Usui</span></span><i>€ 1.119 <s class="ai-was">€ 1.189</s></i></a></div></div><div><p class="aim__ct">I più completi</p><div class="aim__l"><a href="/percorso-gold/"><span style="flex:1"><b>Percorso Gold</b><span>13 incontri + Sigillo</span></span><i>€ 1.289 <s class="ai-was">€ 1.479</s></i></a><a href="/percorso-premium/"><span style="flex:1"><b>Percorso Premium</b><span>14 sessioni, 9 intenti</span></span><i>€ 1.329 <s class="ai-was">€ 1.619</s></i></a><a href="/percorso-five-stars/"><span style="flex:1"><b>Percorso Five Stars</b><span>14 sessioni, 11 intenti</span></span><i>€ 1.379 <s class="ai-was">€ 1.719</s></i></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/confronta-i-percorsi/">Confronta i sette percorsi</a><p class="aim__note">Tutti iniziano con un colloquio di 60 minuti.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Sessioni <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="2"><div><p class="aim__ct">Trattamenti energetici</p><div class="aim__l"><a href="/reiki-energia-dal-mare/"><span style="flex:1"><b>Reiki Energia dal Mare</b><span>Atlantide, Delfini e Balene</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/reiki-usui-con-cristalli/"><span style="flex:1"><b>Reiki Usui con Cristalli</b><span>Il metodo di Mikao Usui</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/cristalloterapia-eterica/"><span style="flex:1"><b>Cristalloterapia Eterica</b><span>11 Intenti e sfera di luce</span></span><i>da € 119 <s class="ai-was">€ 149</s></i></a></div></div><div><p class="aim__ct">Consulenza</p><div class="aim__l"><a href="/fiori-di-bach-con-codici/"><span style="flex:1"><b>Fiori di Bach e Codici</b><span>6 essenze su 38</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/fiori-di-bach/"><span style="flex:1"><b>I 38 Fiori di Bach</b><span>La mappa completa</span></span></a><a href="/boccetta-erboristeria/"><span style="flex:1"><b>La boccetta in erboristeria</b><span>Come si prepara</span></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/prenota/">Prenota una sessione</a><p class="aim__note">Ogni sessione dura circa 50 minuti e si svolge online.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Approfondimenti <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Come lavoro</p><div class="aim__l"><a href="/sette-chakra/"><span style="flex:1"><b>I Sette Chakra</b></span></a><a href="/codici-lemuriani/"><span style="flex:1"><b>I Codici Lemuriani</b></span></a><a href="/griglia-di-cristalli/"><span style="flex:1"><b>La griglia di cristalli</b></span></a><a href="/sfera-di-luce/"><span style="flex:1"><b>La sfera di luce</b></span></a><a href="/musica-di-guarigione/"><span style="flex:1"><b>La musica di guarigione</b></span></a></div></div><div><p class="aim__ct">Gli 11 Intenti</p><div class="aim__l"><a href="/intenti/"><span style="flex:1"><b>La guida completa</b><span>Tutti gli 11 intenti</span></span></a><a href="/intento-abbondanza/"><span style="flex:1"><b>1 · Abbondanza</b></span></a><a href="/intento-portale-lemuriano/"><span style="flex:1"><b>2 · Portale Lemuriano</b></span></a><a href="/intento-iside/"><span style="flex:1"><b>3 · Cristallo di Iside</b></span></a><a href="/intento-aura-angelo/"><span style="flex:1"><b>4 · Aura dell’Angelo</b></span></a><a href="/intento-ponte-quarzo/"><span style="flex:1"><b>5 · Ponte di Quarzo</b></span></a></div></div><div><p class="aim__ct">Segue</p><div class="aim__l"><a href="/intento-chiave-quarzo/"><span style="flex:1"><b>6 · Chiave di Quarzo</b></span></a><a href="/intento-fantasma-quarzo/"><span style="flex:1"><b>7 · Fantasma di Quarzo</b></span></a><a href="/intento-apofillite/"><span style="flex:1"><b>8 · Apofillite</b></span></a><a href="/intento-guardiano-registri/"><span style="flex:1"><b>9 · Guardiano dei Registri</b></span></a><a href="/intento-fiamma-gemella/"><span style="flex:1"><b>10 · Fiamma Gemella</b></span></a><a href="/intento-collegamenti-temporali/"><span style="flex:1"><b>11 · Collegamenti Temporali</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/sigilli/">I Sigilli</a><p class="aim__note">Tre intenti per sessione, scelti da te.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Presentazione <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Il progetto</p><div class="aim__l"><a href="/chi-sono/"><span style="flex:1"><b>Chi sono</b><span>Estetista e operatrice olistica</span></span></a><a href="/formazione-e-metodo/"><span style="flex:1"><b>Formazione e metodo</b><span>Master, livelli e princìpi</span></span></a><a href="/testimonianze/"><span style="flex:1"><b>Testimonianze</b></span></a><a href="/scheda-cliente/"><span style="flex:1"><b>La scheda cliente</b></span></a></div></div><div><p class="aim__ct">Prima di prenotare</p><div class="aim__l"><a href="/come-funziona-a-distanza/"><span style="flex:1"><b>Come funziona a distanza</b><span>Il metodo, passo per passo</span></span></a><a href="/eventi-in-presenza/"><span style="flex:1"><b>Eventi in presenza</b><span>Fano e tutta Italia</span></span></a><a href="/prezzi/"><span style="flex:1"><b>Prezzi</b><span>Il listino completo</span></span></a><a href="/domande-frequenti/"><span style="flex:1"><b>Domande frequenti</b><span>I dubbi più comuni</span></span></a></div></div><div><p class="aim__ct">Informazioni</p><div class="aim__l"><a href="/note-legali/"><span style="flex:1"><b>Note legali</b></span></a><a href="/privacy-policy/"><span style="flex:1"><b>Privacy Policy</b></span></a><a href="/condizioni-uso/"><span style="flex:1"><b>Condizioni d’uso</b></span></a><a href="/disclaimer/"><span style="flex:1"><b>Disclaimer</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/chi-sono/">Scopri chi sono</a><p class="aim__note">Sessioni online, eventi in presenza.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Contatti <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="2"><div><p class="aim__ct">Scrivimi</p><div class="aim__l"><a href="/contatti/"><span style="flex:1"><b>Contatti</b><span>Risposta entro 24 ore</span></span></a><a href="/prenota/"><span style="flex:1"><b>Prenota</b><span>Calendario e orari</span></span></a></div></div><div><p class="aim__ct">Resta aggiornata</p><div class="aim__l"><a href="/newsletter/"><span style="flex:1"><b>Newsletter</b></span></a><a href="/area-riservata/"><span style="flex:1"><b>Area riservata</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/prenota/">Prenota una sessione</a><p class="aim__note">Ti rispondo personalmente entro 24 ore.</p></div></div></div></div></div>			
+			<header id="brx-header"><section id="brxe-ranlum" class="brxe-section bricks-lazy-hidden"><div id="brxe-vwewum" class="brxe-container brx-grid bricks-lazy-hidden"><div id="brxe-evxmdw" class="brxe-block bricks-lazy-hidden"><a id="brxe-huwagy" class="brxe-logo" href="/"><img width="501" height="155" src="/assets/logo-sibilo-dark.svg" class="bricks-site-logo css-filter" alt="Alchimia Interiore" loading="eager" decoding="async" fetchpriority="high" /></a><a id="brxe-kgueul" class="brxe-logo white-logo" href="/"><img width="501" height="155" src="/assets/logo-sibilo-white.svg" class="bricks-site-logo css-filter" alt="Alchimia Interiore" loading="eager" decoding="async" /></a></div><div id="brxe-favlzb" class="brxe-block bricks-lazy-hidden"><div id="brxe-cbuolq" data-script-id="cbuolq" class="brxe-nav-menu"><div class="aim" id="aiMenu"><button class="aim__burger" type="button" id="aiBurger" aria-label="Apri il menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="aim__scrim" id="aiScrim"></div><div class="aim__wrap"><button class="aim__close" type="button" id="aiClose" aria-label="Chiudi il menu">×</button><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Percorsi <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Da 5 sessioni</p><div class="aim__l"><a href="/percorso-oceano/"><span style="flex:1"><b>Percorso Oceano</b><span>Reiki Energia dal Mare</span></span><i>€ 539 <s class="ai-was">€ 599</s></i></a><a href="/percorso-stella/"><span style="flex:1"><b>Percorso Stella</b><span>Reiki Usui e Cristalloterapia</span></span><i>€ 539 <s class="ai-was">€ 599</s></i></a></div></div><div><p class="aim__ct">Da 10 incontri</p><div class="aim__l"><a href="/percorso-sole/"><span style="flex:1"><b>Percorso Sole</b><span>Fiori e Reiki dal Mare</span></span><i>€ 1.119 <s class="ai-was">€ 1.189</s></i></a><a href="/percorso-arcobaleno/"><span style="flex:1"><b>Percorso Arcobaleno</b><span>Fiori e Reiki Usui</span></span><i>€ 1.119 <s class="ai-was">€ 1.189</s></i></a></div></div><div><p class="aim__ct">I più completi</p><div class="aim__l"><a href="/percorso-gold/"><span style="flex:1"><b>Percorso Gold</b><span>13 incontri + Sigillo</span></span><i>€ 1.289 <s class="ai-was">€ 1.479</s></i></a><a href="/percorso-premium/"><span style="flex:1"><b>Percorso Premium</b><span>14 sessioni, 9 intenti</span></span><i>€ 1.329 <s class="ai-was">€ 1.619</s></i></a><a href="/percorso-five-stars/"><span style="flex:1"><b>Percorso Five Stars</b><span>14 sessioni, 11 intenti</span></span><i>€ 1.379 <s class="ai-was">€ 1.719</s></i></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/confronta-i-percorsi/">Confronta i sette percorsi</a><p class="aim__note">Tutti iniziano con un colloquio di 60 minuti.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Sessioni <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="2"><div><p class="aim__ct">Trattamenti energetici</p><div class="aim__l"><a href="/reiki-energia-dal-mare/"><span style="flex:1"><b>Reiki Energia dal Mare</b><span>Atlantide, Delfini e Balene</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/reiki-usui-con-cristalli/"><span style="flex:1"><b>Reiki Usui con Cristalli</b><span>Il metodo di Mikao Usui</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/cristalloterapia-eterica/"><span style="flex:1"><b>Cristalloterapia Eterica</b><span>11 Intenti e sfera di luce</span></span><i>da € 119 <s class="ai-was">€ 149</s></i></a></div></div><div><p class="aim__ct">Consulenza</p><div class="aim__l"><a href="/fiori-di-bach-con-codici/"><span style="flex:1"><b>Fiori di Bach e Codici</b><span>6 essenze su 38</span></span><i>€ 119 <s class="ai-was">€ 149</s></i></a><a href="/fiori-di-bach/"><span style="flex:1"><b>I 38 Fiori di Bach</b><span>La mappa completa</span></span></a><a href="/boccetta-erboristeria/"><span style="flex:1"><b>La boccetta in erboristeria</b><span>Come si prepara</span></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/prenota/">Prenota una sessione</a><p class="aim__note">Ogni sessione dura circa 50 minuti e si svolge online.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Approfondimenti <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Come lavoro</p><div class="aim__l"><a href="/sette-chakra/"><span style="flex:1"><b>I Sette Chakra</b></span></a><a href="/codici-lemuriani/"><span style="flex:1"><b>I Codici Lemuriani</b></span></a><a href="/griglia-di-cristalli/"><span style="flex:1"><b>La griglia di cristalli</b></span></a><a href="/sfera-di-luce/"><span style="flex:1"><b>La sfera di luce</b></span></a><a href="/musica-di-guarigione/"><span style="flex:1"><b>La musica di guarigione</b></span></a></div></div><div><p class="aim__ct">Gli 11 Intenti</p><div class="aim__l"><a href="/intenti/"><span style="flex:1"><b>La guida completa</b><span>Tutti gli 11 intenti</span></span></a><a href="/intento-abbondanza/"><span style="flex:1"><b>1 · Abbondanza</b></span></a><a href="/intento-portale-lemuriano/"><span style="flex:1"><b>2 · Portale Lemuriano</b></span></a><a href="/intento-iside/"><span style="flex:1"><b>3 · Cristallo di Iside</b></span></a><a href="/intento-aura-angelo/"><span style="flex:1"><b>4 · Aura dell’Angelo</b></span></a><a href="/intento-ponte-quarzo/"><span style="flex:1"><b>5 · Ponte di Quarzo</b></span></a></div></div><div><p class="aim__ct">Segue</p><div class="aim__l"><a href="/intento-chiave-quarzo/"><span style="flex:1"><b>6 · Chiave di Quarzo</b></span></a><a href="/intento-fantasma-quarzo/"><span style="flex:1"><b>7 · Fantasma di Quarzo</b></span></a><a href="/intento-apofillite/"><span style="flex:1"><b>8 · Apofillite</b></span></a><a href="/intento-guardiano-registri/"><span style="flex:1"><b>9 · Guardiano dei Registri</b></span></a><a href="/intento-fiamma-gemella/"><span style="flex:1"><b>10 · Fiamma Gemella</b></span></a><a href="/intento-collegamenti-temporali/"><span style="flex:1"><b>11 · Collegamenti Temporali</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/sigilli/">I Sigilli</a><p class="aim__note">Tre intenti per sessione, scelti da te.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Presentazione <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="3"><div><p class="aim__ct">Il progetto</p><div class="aim__l"><a href="/chi-sono/"><span style="flex:1"><b>Chi sono</b><span>Estetista e operatrice olistica</span></span></a><a href="/formazione-e-metodo/"><span style="flex:1"><b>Formazione e metodo</b><span>Master, livelli e princìpi</span></span></a><a href="/testimonianze/"><span style="flex:1"><b>Testimonianze</b></span></a><a href="/scheda-cliente/"><span style="flex:1"><b>La scheda cliente</b></span></a></div></div><div><p class="aim__ct">Prima di prenotare</p><div class="aim__l"><a href="/come-funziona-a-distanza/"><span style="flex:1"><b>Come funziona a distanza</b><span>Il metodo, passo per passo</span></span></a><a href="/eventi-in-presenza/"><span style="flex:1"><b>Eventi in presenza</b><span>Fano e tutta Italia</span></span></a><a href="/prezzi/"><span style="flex:1"><b>Prezzi</b><span>Il listino completo</span></span></a><a href="/domande-frequenti/"><span style="flex:1"><b>Domande frequenti</b><span>I dubbi più comuni</span></span></a></div></div><div><p class="aim__ct">Informazioni</p><div class="aim__l"><a href="/note-legali/"><span style="flex:1"><b>Note legali</b></span></a><a href="/privacy-policy/"><span style="flex:1"><b>Privacy Policy</b></span></a><a href="/condizioni-uso/"><span style="flex:1"><b>Condizioni d’uso</b></span></a><a href="/disclaimer/"><span style="flex:1"><b>Disclaimer</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/chi-sono/">Scopri chi sono</a><p class="aim__note">Sessioni online, eventi in presenza.</p></div></div></div><div class="aim__t"><button class="aim__b" type="button" aria-expanded="false">Contatti <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="aim__p aim__p--wide"><div class="aim__cols" data-c="2"><div><p class="aim__ct">Scrivimi</p><div class="aim__l"><a href="/contatti/"><span style="flex:1"><b>Contatti</b><span>Risposta entro 24 ore</span></span></a><a href="/prenota/"><span style="flex:1"><b>Prenota</b><span>Calendario e orari</span></span></a></div></div><div><p class="aim__ct">Resta aggiornata</p><div class="aim__l"><a href="/newsletter/"><span style="flex:1"><b>Newsletter</b></span></a></div></div></div><div class="aim__foot"><a class="aim__cta" href="/prenota/">Prenota una sessione</a><p class="aim__note">Ti rispondo personalmente entro 24 ore.</p></div></div></div></div></div>			
 			<div class="bricks-mobile-menu-overlay"></div></div></div><div id="brxe-mvpzok" class="brxe-block bricks-lazy-hidden"><div id="brxe-ovdacu" class="brxe-div bricks-lazy-hidden"><div id="brxe-zjfyfd" class="brxe-shortcode">         
         <div id="gcs-container-6a886933be04b">
             <div class="ais" id="aiSearch"><form class="ais__f" role="search" onsubmit="return false"><input class="ais__i" id="aiQ" type="search" placeholder="Cerca nel sito…" autocomplete="off" aria-label="Cerca nel sito" aria-expanded="false" aria-controls="aiRes"><button class="ais__b" type="submit" aria-label="Cerca"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button></form><div class="ais__r" id="aiRes" role="listbox"></div></div>
         </div>
         
-        </div></div><div id="brxe-imesis" class="brxe-div bricks-lazy-hidden"><div id="brxe-pnwfuo" class="brxe-shortcode"><input type="hidden" class="customcookie" name="customcookie" value="no"><div class="ya-login-wrap">
-        <a class="brxe-text-basic header-login-link"
-           href="/area-riservata/">Accedi</a>
-    </div>
-
-    <script>
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-        return null;
-    }
-
-    function cleanCookie(value, prefix) {
-        if (!value) return "";
-        if (value.startsWith(prefix + "=")) {
-            value = value.slice(prefix.length + 1);
-        }
-        return decodeURIComponent(value);
-    }
-
-    document.querySelectorAll(".ya-login-wrap").forEach(function(el){
-        const firstNameRaw = getCookie("FirstName");
-        const lastNameRaw = getCookie("LastName");
-        const dashboardNameRaw = getCookie("DashboardName");
-        const userIdRaw = getCookie("SFSSOUserId");
-
-        const firstName = cleanCookie(firstNameRaw, "FirstName");
-        const lastName = cleanCookie(lastNameRaw, "LastName");
-        const dashboardName = cleanCookie(dashboardNameRaw, "DashboardName");
-        const userId = cleanCookie(userIdRaw, "SFSSOUserId");
-
-        if (firstName || lastName) {
-
-            if (dashboardName != "Dashboard") {
-                document.getElementsByClassName("customcookie")[0].value = "yes";
-            }
-
-            el.innerHTML = `
-                <div class="ya-user-wrapper">
-                    <a href="#" class="ya-user-toggle" onclick="return false;">
-                        Hi ${firstName} ${lastName}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="none" class="menu-item-icon">
-                            <path d="M1.5 4l4.5 4 4.5-4" stroke-width="1.5" stroke="currentColor"/>
-                        </svg>
-                    </a>
-                    <div class="ya-user-dropdown">
-                        <a class="ya-manage-link" href="/area-riservata/">Accedi</a>
-                        <a class="ya-logout-link" href="#" onclick="yaCustomLogout(); return false;">Log Out</a>
-                    </div>
-                </div>
-            `;
-        }
-    });
-
-    function yaCustomLogout() {
-        document.cookie = "LSKey-c$FirstName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$LastName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$DashboardName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$SFSSOUserId=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
-        const expiry = new Date();
-        expiry.setTime(expiry.getTime() + 5*60*1000);
-        document.cookie = "Initiator=wplogout; path=/; domain=.alchimiainteriorediluce.it; Secure; SameSite=Lax; expires=" + expiry.toUTCString() + ";";
-
-        const logoutUrl = "index.html";
-        window.location.href = logoutUrl;
-    }
-    </script></div></div><div id="brxe-cxiocg" class="brxe-div bricks-lazy-hidden"><a id="brxe-ylhkdz" class="brxe-button ai-cta bricks-button bricks-background-primary" href="/prenota/">Inizia qui</a></div></div><div id="brxe-xwwyjf" class="brxe-div bricks-lazy-hidden"><div id="brxe-geprlh" data-script-id="geprlh" class="brxe-coreburguer bc-core-burguer" data-interactions="[{&quot;id&quot;:&quot;xvtref&quot;,&quot;trigger&quot;:&quot;click&quot;,&quot;action&quot;:&quot;toggleAttribute&quot;,&quot;actionAttributeKey&quot;:&quot;class&quot;,&quot;actionAttributeValue&quot;:&quot;menu-is-active&quot;,&quot;target&quot;:&quot;custom&quot;,&quot;targetSelector&quot;:&quot;.menu-home-internal&quot;,&quot;titleEditable&quot;:&quot;Menu Overlay&quot;},{&quot;id&quot;:&quot;zomaft&quot;,&quot;trigger&quot;:&quot;click&quot;,&quot;titleEditable&quot;:&quot;Logo Opacity&quot;,&quot;action&quot;:&quot;toggleAttribute&quot;,&quot;actionAttributeKey&quot;:&quot;class&quot;,&quot;actionAttributeValue&quot;:&quot;logo-in&quot;,&quot;target&quot;:&quot;custom&quot;,&quot;targetSelector&quot;:&quot;.white-logo&quot;}]" data-interaction-id="6baedb">
+        </div></div><div id="brxe-cxiocg" class="brxe-div bricks-lazy-hidden"><a id="brxe-ylhkdz" class="brxe-button ai-cta bricks-button bricks-background-primary" href="/prenota/">Inizia qui</a></div></div><div id="brxe-xwwyjf" class="brxe-div bricks-lazy-hidden"><div id="brxe-geprlh" data-script-id="geprlh" class="brxe-coreburguer bc-core-burguer" data-interactions="[{&quot;id&quot;:&quot;xvtref&quot;,&quot;trigger&quot;:&quot;click&quot;,&quot;action&quot;:&quot;toggleAttribute&quot;,&quot;actionAttributeKey&quot;:&quot;class&quot;,&quot;actionAttributeValue&quot;:&quot;menu-is-active&quot;,&quot;target&quot;:&quot;custom&quot;,&quot;targetSelector&quot;:&quot;.menu-home-internal&quot;,&quot;titleEditable&quot;:&quot;Menu Overlay&quot;},{&quot;id&quot;:&quot;zomaft&quot;,&quot;trigger&quot;:&quot;click&quot;,&quot;titleEditable&quot;:&quot;Logo Opacity&quot;,&quot;action&quot;:&quot;toggleAttribute&quot;,&quot;actionAttributeKey&quot;:&quot;class&quot;,&quot;actionAttributeValue&quot;:&quot;logo-in&quot;,&quot;target&quot;:&quot;custom&quot;,&quot;targetSelector&quot;:&quot;.white-logo&quot;}]" data-interaction-id="6baedb">
             <button aria-label="chiudi" data-scroll class="next-burger-flipped--flippingv4 next-burger-flipped">
                 <svg class='hamRotate' viewBox='0 0 100 100'>
                 <path
@@ -1429,132 +1143,9 @@ a.brxe-block:hover,a.brxe-container:hover,a.brxe-div:hover{text-decoration:none}
             
         </div>
         
-        </div></div><div id="mobile-menu-sub" data-script-id="xsrvou" class="brxe-nav-menu"></div><div id="brxe-lqfxxt" class="brxe-block bricks-lazy-hidden"><div id="brxe-yzevyb" class="brxe-div bricks-lazy-hidden"><a id="brxe-xoqpbf" class="brxe-text-basic header-login-link" href="/area-riservata/">Accedi</a><div id="brxe-yagils" class="brxe-shortcode"><input type="hidden" class="customcookie" name="customcookie" value="no"><div class="ya-login-wrap">
-        <a class="brxe-text-basic header-login-link"
-           href="/area-riservata/">Accedi</a>
-    </div>
+        </div></div><div id="mobile-menu-sub" data-script-id="xsrvou" class="brxe-nav-menu"></div><div id="brxe-lqfxxt" class="brxe-block bricks-lazy-hidden"><div id="brxe-yzevyb" class="brxe-div bricks-lazy-hidden"><a id="brxe-phaeis" class="brxe-button ai-cta bricks-button bricks-background-primary" href="/prenota/">Inizia qui</a></div></div></div></section></header><main id="brx-content"><section class="brxe-section section-spacing"><div class="brxe-container"><p class="brxe-text-basic tagline-txt">Note Legali</p><h1 class="brxe-heading">Privacy Policy</h1><div class="brxe-text" style="max-width:820px;margin-top:2.5rem;"><p>Questa informativa descrive come vengono trattati i dati personali di chi visita questo sito, si iscrive alla newsletter, prenota una sessione o acquista un percorso. È redatta ai sensi del Regolamento UE 2016/679 (GDPR).</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Titolare del trattamento</h4><p>Il Titolare del trattamento è Lara La Prova, titolare di “Alchimia Interiore”, P.IVA 02886140413. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere attraverso la pagina Contatti del sito.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Quali dati raccolgo</h4><ul><li><strong>Dati che fornisci tu:</strong> nome, indirizzo email e, per gli acquisti, i dati di fatturazione necessari a emettere il documento fiscale.</li><li><strong>Dati raccolti automaticamente:</strong> indirizzo IP, tipo di browser e dispositivo, pagine visitate e tempi di permanenza, raccolti in forma aggregata a fini statistici.</li><li><strong>Contenuti delle sessioni:</strong> quanto mi racconti prima di una sessione e quanto emerge durante il trattamento è coperto da riservatezza assoluta e non viene condiviso con nessuno. Non chiedo diagnosi, referti o dati sanitari, e non li conservo.</li></ul><h4 class="brxe-heading" style="margin-top:2.2rem;">Perché li tratto</h4><ul><li>Per erogare i servizi richiesti: sessioni di cristalloterapia, Reiki, consulenze di floriterapia e percorsi.</li><li>Per adempiere agli obblighi fiscali e contabili previsti dalla legge.</li><li>Per inviarti la Newsletter, solo se hai prestato un consenso libero e specifico.</li><li>Per migliorare il sito, sulla base del legittimo interesse a garantirne il corretto funzionamento.</li></ul><h4 class="brxe-heading" style="margin-top:2.2rem;">Per quanto tempo li conservo</h4><p>I dati di fatturazione sono conservati per dieci anni, come previsto dalla normativa fiscale. I dati di iscrizione alla newsletter restano attivi fino alla tua disiscrizione, possibile in ogni momento dal link presente in fondo a ogni email. I resoconti delle sessioni e le schede tecniche dei Fiori di Bach ti vengono inviati e non sono usati per altre finalità.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">A chi possono essere comunicati</h4><p>I dati possono essere trattati da fornitori che agiscono come responsabili del trattamento: il servizio di hosting del sito, la piattaforma di invio newsletter, il gestore dei pagamenti e il commercialista. Non vengono ceduti né venduti a terzi per finalità commerciali.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Cookie</h4><p>Il sito utilizza cookie tecnici, necessari al funzionamento, e — previo tuo consenso — cookie statistici e di terze parti. Puoi modificare le tue preferenze in qualsiasi momento dalle impostazioni del browser o dal banner dedicato.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">I tuoi diritti</h4><p>Puoi chiedere in qualsiasi momento l’accesso ai tuoi dati, la loro rettifica o cancellazione, la limitazione o l’opposizione al trattamento, e la portabilità. Puoi revocare il consenso prestato senza che questo pregiudichi la liceità del trattamento precedente. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Sicurezza</h4><p>Il sito è protetto da certificato SSL e i dati sono conservati su server situati nell’Unione Europea, con misure tecniche e organizzative adeguate a prevenire accessi non autorizzati.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Contatti</h4><p>Per esercitare i tuoi diritti o per qualsiasi chiarimento su questa informativa, scrivimi dalla pagina Contatti: rispondo personalmente.</p></div></div></section></main><footer id="brx-footer"><section id="brxe-028a77" class="brxe-section bricks-lazy-hidden"><div id="brxe-edad1b" class="brxe-container bricks-lazy-hidden"><div id="brxe-6d6590" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-e0edf3" class="brxe-heading">Legale e informazioni</h3><nav id="brxe-4f4bff" data-script-id="4f4bff" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Legale e informazioni" data-toggle="never"><ul id="brxe-208df6" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a class="brxe-text-link" href="/chi-sono/">Chi sono</a></li><li class="menu-item"><a class="brxe-text-link" href="/formazione-e-metodo/">Formazione e metodo</a></li><li class="menu-item"><a class="brxe-text-link" href="/eventi-in-presenza/">Eventi in presenza</a></li><li class="menu-item"><a class="brxe-text-link" href="/testimonianze/">Testimonianze</a></li><li class="menu-item"><a class="brxe-text-link" href="/note-legali/">Note legali</a></li></ul></nav></div><div id="brxe-34ca50" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-ed8d03" class="brxe-heading">Le Sessioni</h3><nav id="brxe-251cee" data-script-id="251cee" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Le Sessioni" data-toggle="never"><ul id="brxe-f28a20" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a class="brxe-text-link" href="/reiki-energia-dal-mare/">Reiki Energia dal Mare</a></li><li class="menu-item"><a class="brxe-text-link" href="/reiki-usui-con-cristalli/">Reiki Usui con Cristalli</a></li><li class="menu-item"><a class="brxe-text-link" href="/fiori-di-bach-con-codici/">Fiori di Bach con Codici</a></li><li class="menu-item"><a class="brxe-text-link" href="/codici-lemuriani/">Codici Lemuriani</a></li><li class="menu-item"><a class="brxe-text-link" href="/sette-chakra/">I Sette Chakra</a></li><li class="menu-item"><a class="brxe-text-link" href="/come-funziona-a-distanza/">Come funziona a distanza</a></li></ul></nav></div><div id="brxe-19a034" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-5c2c09" class="brxe-heading">I Percorsi</h3><nav id="brxe-4bd632" data-script-id="4bd632" class="brxe-nav-nested bricks-lazy-hidden" aria-label="I Percorsi" data-toggle="never"><ul id="brxe-84ba54" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a class="brxe-text-link" href="/percorso-stella/">Percorso Stella</a></li><li class="menu-item"><a class="brxe-text-link" href="/percorso-sole/">Percorso Sole</a></li><li class="menu-item"><a class="brxe-text-link" href="/percorso-gold/">Percorso Gold</a></li><li class="menu-item"><a class="brxe-text-link" href="/confronta-i-percorsi/">Confronta i percorsi</a></li><li class="menu-item"><a class="brxe-text-link" href="/prezzi/">Prezzi</a></li><li class="menu-item"><a class="brxe-text-link" href="/prenota/">Prenota una sessione</a></li></ul></nav></div><div id="brxe-434b81" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-2df8ab" class="brxe-heading">Contatti</h3><nav id="brxe-a7803e" data-script-id="a7803e" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Contatti" data-toggle="never"><ul id="brxe-b8aaaa" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a class="brxe-text-link" href="/domande-frequenti/">Domande frequenti</a></li><li class="menu-item"><a class="brxe-text-link" href="/contatti/">Contatti</a></li><li class="menu-item"><a class="brxe-text-link" href="/newsletter/">Newsletter</a></li></ul></nav></div></div><div id="brxe-cf74af" class="brxe-block bricks-lazy-hidden"><ul id="brxe-imeuym" class="brxe-social-icons"><li class="repeater-item has-link"><a href="/contatti/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square icon"></i></a></li><li class="repeater-item has-link"><a href="https://www.instagram.com/lara_la_prova/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram icon"></i></a></li><li class="repeater-item has-link"><a href="https://www.tiktok.com/@alchimia.interiore" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok icon"></i></a></li></ul></div><div id="brxe-icyuks" class="brxe-block bricks-lazy-hidden"><p id="brxe-komkni" class="brxe-text-basic">Alchimia Interiore · Operatrice olistica · Master Reiki Energia dal Mare · Reiki Usui 2° livello · Master in Cristalloterapia · Fiori di Bach · Codici Lemuriani. Sessioni online, eventi in presenza — Fano e provincia principalmente, ma anche in tutta Italia. P.IVA 02886140413. Le attività proposte non sostituiscono diagnosi, cure mediche, psicologiche o farmacologiche.</p></div></section><section id="brxe-4454fb" class="brxe-section bricks-lazy-hidden"><div id="brxe-d6ee4b" class="brxe-container bricks-lazy-hidden"><div id="brxe-cecf5e" class="brxe-block bricks-lazy-hidden"><nav id="brxe-ae4e5e" data-script-id="ae4e5e" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-0831c3" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-96c280" class="brxe-text-link" href="/disclaimer/">Disclaimer</a></li><li class="menu-item"><a id="brxe-2fa22c" class="brxe-text-link" href="/privacy-policy/" aria-current="page">Privacy Policy</a></li><li class="menu-item"><a id="brxe-a30f2a" class="brxe-text-link" href="/condizioni-uso/">Condizioni d’uso</a></li><li class="menu-item"><button id="brxe-80bbc9" data-script-id="80bbc9" class="brxe-toggle brx-toggle-div" aria-label="Apri" aria-expanded="false"><span class="brxa-wrap"><span class="brxa-inner"></span></span></button></li></ul><button id="brxe-549030" data-script-id="549030" class="brxe-toggle" aria-label="Apri" aria-expanded="false"><span class="brxa-wrap"><span class="brxa-inner"></span></span></button></nav></div></div></section></footer>
 
-    <script>
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-        return null;
-    }
 
-    function cleanCookie(value, prefix) {
-        if (!value) return "";
-        if (value.startsWith(prefix + "=")) {
-            value = value.slice(prefix.length + 1);
-        }
-        return decodeURIComponent(value);
-    }
-
-    document.querySelectorAll(".ya-login-wrap").forEach(function(el){
-        const firstNameRaw = getCookie("FirstName");
-        const lastNameRaw = getCookie("LastName");
-        const dashboardNameRaw = getCookie("DashboardName");
-        const userIdRaw = getCookie("SFSSOUserId");
-
-        const firstName = cleanCookie(firstNameRaw, "FirstName");
-        const lastName = cleanCookie(lastNameRaw, "LastName");
-        const dashboardName = cleanCookie(dashboardNameRaw, "DashboardName");
-        const userId = cleanCookie(userIdRaw, "SFSSOUserId");
-
-        if (firstName || lastName) {
-
-            if (dashboardName != "Dashboard") {
-                document.getElementsByClassName("customcookie")[0].value = "yes";
-            }
-
-            el.innerHTML = `
-                <div class="ya-user-wrapper">
-                    <a href="#" class="ya-user-toggle" onclick="return false;">
-                        Hi ${firstName} ${lastName}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="none" class="menu-item-icon">
-                            <path d="M1.5 4l4.5 4 4.5-4" stroke-width="1.5" stroke="currentColor"/>
-                        </svg>
-                    </a>
-                    <div class="ya-user-dropdown">
-                        <a class="ya-manage-link" href="/area-riservata/">Accedi</a>
-                        <a class="ya-logout-link" href="#" onclick="yaCustomLogout(); return false;">Log Out</a>
-                    </div>
-                </div>
-            `;
-        }
-    });
-
-    function yaCustomLogout() {
-        document.cookie = "LSKey-c$FirstName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$LastName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$DashboardName=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "LSKey-c$SFSSOUserId=; path=/; domain=.alchimiainteriorediluce.it; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
-        const expiry = new Date();
-        expiry.setTime(expiry.getTime() + 5*60*1000);
-        document.cookie = "Initiator=wplogout; path=/; domain=.alchimiainteriorediluce.it; Secure; SameSite=Lax; expires=" + expiry.toUTCString() + ";";
-
-        const logoutUrl = "index.html";
-        window.location.href = logoutUrl;
-    }
-    </script></div><a id="brxe-phaeis" class="brxe-button ai-cta bricks-button bricks-background-primary" href="/prenota/">Inizia qui</a></div></div></div></section></header><main id="brx-content"><section class="brxe-section section-spacing"><div class="brxe-container"><p class="brxe-text-basic tagline-txt">Note Legali</p><h1 class="brxe-heading">Privacy Policy</h1><div class="brxe-text" style="max-width:820px;margin-top:2.5rem;"><p>Questa informativa descrive come vengono trattati i dati personali di chi visita questo sito, si iscrive alla newsletter, prenota una sessione o acquista un percorso. È redatta ai sensi del Regolamento UE 2016/679 (GDPR).</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Titolare del trattamento</h4><p>Il Titolare del trattamento è Lara La Prova, titolare di “Alchimia Interiore”, P.IVA 02886140413. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere attraverso la pagina Contatti del sito.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Quali dati raccolgo</h4><ul><li><strong>Dati che fornisci tu:</strong> nome, indirizzo email e, per gli acquisti, i dati di fatturazione necessari a emettere il documento fiscale.</li><li><strong>Dati raccolti automaticamente:</strong> indirizzo IP, tipo di browser e dispositivo, pagine visitate e tempi di permanenza, raccolti in forma aggregata a fini statistici.</li><li><strong>Contenuti delle sessioni:</strong> quanto mi racconti prima di una sessione e quanto emerge durante il trattamento è coperto da riservatezza assoluta e non viene condiviso con nessuno. Non chiedo diagnosi, referti o dati sanitari, e non li conservo.</li></ul><h4 class="brxe-heading" style="margin-top:2.2rem;">Perché li tratto</h4><ul><li>Per erogare i servizi richiesti: sessioni di cristalloterapia, Reiki, consulenze di floriterapia e percorsi.</li><li>Per adempiere agli obblighi fiscali e contabili previsti dalla legge.</li><li>Per inviarti la Newsletter, solo se hai prestato un consenso libero e specifico.</li><li>Per migliorare il sito, sulla base del legittimo interesse a garantirne il corretto funzionamento.</li></ul><h4 class="brxe-heading" style="margin-top:2.2rem;">Per quanto tempo li conservo</h4><p>I dati di fatturazione sono conservati per dieci anni, come previsto dalla normativa fiscale. I dati di iscrizione alla newsletter restano attivi fino alla tua disiscrizione, possibile in ogni momento dal link presente in fondo a ogni email. I resoconti delle sessioni e le schede tecniche dei Fiori di Bach ti vengono inviati e non sono usati per altre finalità.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">A chi possono essere comunicati</h4><p>I dati possono essere trattati da fornitori che agiscono come responsabili del trattamento: il servizio di hosting del sito, la piattaforma di invio newsletter, il gestore dei pagamenti e il commercialista. Non vengono ceduti né venduti a terzi per finalità commerciali.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Cookie</h4><p>Il sito utilizza cookie tecnici, necessari al funzionamento, e — previo tuo consenso — cookie statistici e di terze parti. Puoi modificare le tue preferenze in qualsiasi momento dalle impostazioni del browser o dal banner dedicato.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">I tuoi diritti</h4><p>Puoi chiedere in qualsiasi momento l’accesso ai tuoi dati, la loro rettifica o cancellazione, la limitazione o l’opposizione al trattamento, e la portabilità. Puoi revocare il consenso prestato senza che questo pregiudichi la liceità del trattamento precedente. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Sicurezza</h4><p>Il sito è protetto da certificato SSL e i dati sono conservati su server situati nell’Unione Europea, con misure tecniche e organizzative adeguate a prevenire accessi non autorizzati.</p><h4 class="brxe-heading" style="margin-top:2.2rem;">Contatti</h4><p>Per esercitare i tuoi diritti o per qualsiasi chiarimento su questa informativa, scrivimi dalla pagina Contatti: rispondo personalmente.</p></div></div></section></main><footer id="brx-footer"><section id="brxe-028a77" class="brxe-section bricks-lazy-hidden"><div id="brxe-edad1b" class="brxe-container bricks-lazy-hidden"><div id="brxe-6d6590" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-e0edf3" class="brxe-heading">Le Sessioni</h3><nav id="brxe-4f4bff" data-script-id="4f4bff" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-208df6" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-fff769" class="brxe-text-link" href="/reiki-energia-dal-mare/">Reiki Energia dal Mare</a></li><li class="menu-item"><a id="brxe-cfgkpi" class="brxe-text-link" href="/note-legali/">Note legali</a></li><li class="menu-item"><a id="brxe-3683d4" class="brxe-text-link" href="/chi-sono/">Chi sono</a></li><li class="menu-item"><a id="brxe-fc8cb5" class="brxe-text-link" href="/formazione-e-metodo/">Formazione e metodo</a></li></ul></nav></div><div id="brxe-34ca50" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-ed8d03" class="brxe-heading">Le Sessioni</h3><nav id="brxe-251cee" data-script-id="251cee" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-f28a20" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-15027e" class="brxe-text-link" href="/come-funziona-a-distanza/">Come funziona a distanza</a></li><li class="menu-item"><a class="brxe-text-link" href="/eventi-in-presenza/">Eventi in presenza</a></li><li class="menu-item"><a class="brxe-text-link" href="/testimonianze/">Testimonianze</a></li><li class="menu-item"><a id="brxe-f5bbed" class="brxe-text-link" href="/percorso-stella/">Percorso Stella</a></li><li class="menu-item"><a id="brxe-ef225b" class="brxe-text-link" href="/percorso-gold/">Percorso Gold</a></li></ul></nav></div><div id="brxe-19a034" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-5c2c09" class="brxe-heading">I Percorsi</h3><nav id="brxe-4bd632" data-script-id="4bd632" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-84ba54" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-812df6" class="brxe-text-link" href="/prenota/">Prenota una sessione</a></li><li class="menu-item"><a id="brxe-f6cddc" class="brxe-text-link" href="/percorso-sole/">Percorso Sole</a></li><li class="menu-item"><a class="brxe-text-link" href="/prezzi/">Prezzi</a></li><li class="menu-item"><a class="brxe-text-link" href="/sette-chakra/">I Sette Chakra</a></li><li class="menu-item"><a class="brxe-text-link" href="/codici-lemuriani/">Codici Lemuriani</a></li><li class="menu-item"><a id="brxe-aaf311" class="brxe-text-link" href="/percorso-gold/">Percorso Gold</a></li></ul></nav></div><div id="brxe-434b81" class="brxe-div bricks-lazy-hidden"><h3 id="brxe-2df8ab" class="brxe-heading">Contatti</h3><nav id="brxe-a7803e" data-script-id="a7803e" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-b8aaaa" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-caf44f" class="brxe-text-link" href="/domande-frequenti/" target="_blank">Domande Frequenti</a></li><li class="menu-item"><a id="brxe-3b8171" class="brxe-text-link" href="/area-riservata/">Area riservata</a></li><li class="menu-item"><a id="brxe-e86c4c" class="brxe-text-link" href="/contatti/">Contatti</a></li><li class="menu-item"><a id="brxe-xtwsmj" class="brxe-text-link" href="/newsletter/">Newsletter</a></li></ul></nav></div></div><div id="brxe-cf74af" class="brxe-block bricks-lazy-hidden"><ul id="brxe-imeuym" class="brxe-social-icons"><li class="repeater-item has-link"><a href="/contatti/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square icon"></i></a></li><li class="repeater-item has-link"><a href="https://www.instagram.com/lara_la_prova/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram icon"></i></a></li><li class="repeater-item has-link"><a href="https://www.tiktok.com/@alchimia.interiore" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok icon"></i></a></li></ul></div><div id="brxe-icyuks" class="brxe-block bricks-lazy-hidden"><p id="brxe-komkni" class="brxe-text-basic">Alchimia Interiore · Operatrice olistica · Master Reiki Energia dal Mare · Reiki Usui 2° livello · Master in Cristalloterapia · Fiori di Bach · Codici Lemuriani. Sessioni online, eventi in presenza — Fano e provincia principalmente, ma anche in tutta Italia. P.IVA 02886140413. Le attività proposte non sostituiscono diagnosi, cure mediche, psicologiche o farmacologiche.</p></div></section><section id="brxe-4454fb" class="brxe-section bricks-lazy-hidden"><div id="brxe-d6ee4b" class="brxe-container bricks-lazy-hidden"><div id="brxe-cecf5e" class="brxe-block bricks-lazy-hidden"><nav id="brxe-ae4e5e" data-script-id="ae4e5e" class="brxe-nav-nested bricks-lazy-hidden" aria-label="Menu" data-toggle="never"><ul id="brxe-0831c3" class="brxe-block brx-nav-nested-items bricks-lazy-hidden"><li class="menu-item"><a id="brxe-96c280" class="brxe-text-link" href="/disclaimer/">Disclaimer</a></li><li class="menu-item"><a id="brxe-2fa22c" class="brxe-text-link" href="/privacy-policy/" aria-current="page">Privacy Policy</a></li><li class="menu-item"><a id="brxe-a30f2a" class="brxe-text-link" href="/condizioni-uso/">Condizioni d’uso</a></li><li class="menu-item"><button id="brxe-80bbc9" data-script-id="80bbc9" class="brxe-toggle brx-toggle-div" aria-label="Apri" aria-expanded="false"><span class="brxa-wrap"><span class="brxa-inner"></span></span></button></li></ul><button id="brxe-549030" data-script-id="549030" class="brxe-toggle" aria-label="Apri" aria-expanded="false"><span class="brxa-wrap"><span class="brxa-inner"></span></span></button></nav></div></div></section></footer>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-        return null;
-    }
-
-    function cleanCookie(value, prefix) {
-        if (!value) return "";
-        if (value.startsWith(prefix + "=")) {
-            value = value.slice(prefix.length + 1);
-        }
-        return decodeURIComponent(value);
-    }
-
-    const buttons = document.querySelectorAll(".ai-cta");
-    if (buttons.length > 0) {
-        const dashboardRaw = getCookie("DashboardName");
-        const dashboardName = cleanCookie(dashboardRaw, "DashboardName");
-        const firstNameRaw = getCookie("FirstName");
-        const lastNameRaw = getCookie("LastName");
-        const firstName = cleanCookie(firstNameRaw, "FirstName");
-        const lastName = cleanCookie(lastNameRaw, "LastName");
-
-        let targetUrl = "prenota.html";
-        let btnLabel = "Inizia qui";
-
-        if (firstName || lastName) {
-            btnLabel = dashboardName;
-
-            if (dashboardName.includes("Teacher Dashboard")) {
-                targetUrl = "area-riservata.html";
-            } else if (dashboardName.includes("School Dashboard")) {
-                targetUrl = "index.html";
-            } else if (dashboardName.includes("Dashboard")) {
-                targetUrl = "index.html";
-            } else if (dashboardName.includes("Staff Dashboard")) {
-                targetUrl = "index.html";
-            }
-        }
-
-        buttons.forEach(btn => {
-            btn.textContent = btnLabel;
-            btn.setAttribute("href", targetUrl);
-            btn.removeAttribute("onclick");
-
-            btn.addEventListener("click", function(e) {
-                e.stopImmediatePropagation();
-                window.location.href = targetUrl;
-            }, true);
-        });
-    }
-});
-</script>
 
 <script>
 (function() {
@@ -1619,143 +1210,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  <script>
-    // Objeto global para almacenar datos de la ubicación seleccionada
-    let placeData = {};
-
-    // 1) Inicializa el autocomplete y resetea placeData al teclear
-    function initAutocomplete() {
-      const input = document.getElementsByName('form-field-19d589')[0];
-      if (!input) {
-        console.warn('initAutocomplete: input no encontrado');
-        return;
-      }
-
-      const autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['(cities)']
-      });
-
-      // Si el usuario escribe algo, borramos los datos previos de placeData
-      input.addEventListener('input', () => {
-        placeData = {};
-      });
-
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-          return;
-        }
-        const comps = place.address_components;
-        const getComp = type => {
-          const c = comps.find(x => x.types.includes(type));
-          return c ? c.long_name : '';
-        };
-        placeData = {
-          googleAddress: place.formatted_address,                      // e.g. "Madrid, Spain"
-          latitude:      place.geometry.location.lat(),
-          longitude:     place.geometry.location.lng(),
-          street:        [getComp('street_number'), getComp('route')]
-                            .filter(Boolean).join(' ') || ' ',        // número y calle
-          state:         getComp('administrative_area_level_1'),       // e.g. "Community of Madrid"
-          country:       getComp('country')                            // e.g. "Spain"
-        };
-        console.log('Datos de lugar actualizados:', placeData);
-      });
-    }
-
-    // 2) IDs de formulario → tipo
-    const formConfig = {
-      'brxe-87f2ed': 'School',
-      'brxe-eeamfb': 'Teacher',
-      'brxe-nivkin': 'Co-Ed'
-    };
-
-    // 3) Engancha el listener de submit en cada form
-    function ai_attachForm(form, type) {
-      if (form.dataset.aiFormAttached) return;
-      form.dataset.aiFormAttached = 'true';
-      console.log(`ai_attachForm: engancho ${form.id} como ${type}`);
-
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(`submit detectado en ${form.id}`);
-
-        // Validación: obligamos a que se haya seleccionado un place del Autocomplete
-        if (!placeData.googleAddress || !placeData.latitude) {
-          return;
-        }
-
-        // Recolecta campos del formulario
-        const locationRaw    = form.querySelector('[name="form-field-19d589"]')?.value.trim() || '';
-        const nameRaw        = form.querySelector('[name="form-field-4c3b84"]')?.value.trim()   || '';
-        const designationRaw = form.querySelector('[name="form-field-vnpybv"]')?.value.trim()   || '';
-        // Limpiamos el ® y extraemos solo la parte antes de ":"
-        const designation    = designationRaw.split(':')[0].replace(/®/g, '').trim();
-
-        // Valores obtenidos de placeData
-        const { googleAddress, latitude, longitude, street, state, country } = placeData;
-
-        // Construcción de parámetros en el orden correcto
-        const params = [
-          `type=${encodeURIComponent(type)}`,
-          nameRaw        ? `keyword=${encodeURIComponent(nameRaw)}` : null,
-          designation    ? `designation=${encodeURIComponent(encodeURIComponent(designation))}` : null,
-          `googleAddress=${encodeURIComponent(encodeURIComponent(googleAddress))}`,
-          `latitude=${latitude}`,
-          `longitude=${longitude}`,
-          `street=${encodeURIComponent(encodeURIComponent(street))}`,
-          `location=${encodeURIComponent(locationRaw)}`,
-          state          ? `state=${encodeURIComponent(state)}` : null,
-          `country=${encodeURIComponent(encodeURIComponent(country))}`,
-          `locationinput=${encodeURIComponent(encodeURIComponent(locationRaw))}`
-        ].filter(Boolean);
-
-        const base = 'index.html';
-        const url  = `${base}?${params.join('&')}`;
-        console.log('Redirigiendo a:', url);
-        window.location.href = url;
-      });
-    }
-
-    // 4) Escanea el DOM por los formularios configurados
-    function scanForForms() {
-      Object.entries(formConfig).forEach(([id, type]) => {
-        const form = document.getElementById(id);
-        if (form) ai_attachForm(form, type);
-      });
-    }
-
-    // 5) Observador de mutaciones para detectar inyecciones dinámicas
-    function startObserver() {
-      const observer = new MutationObserver(() => {
-        scanForForms();
-        const done = Object.keys(formConfig)
-          .every(id => document.getElementById(id)?.dataset.aiFormAttached);
-        if (done) observer.disconnect();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
-
-    // 6) Polling de respaldo cada 500 ms
-    function startPolling() {
-      const interval = setInterval(() => {
-        scanForForms();
-        const done = Object.keys(formConfig)
-          .every(id => document.getElementById(id)?.dataset.aiFormAttached);
-        if (done) clearInterval(interval);
-      }, 500);
-    }
-
-    // 7) Inicialización al cargar toda la página
-    window.addEventListener('load', () => {
-      console.log('window.load: inicializando script');
-      initAutocomplete();
-      scanForForms();
-      startObserver();
-      startPolling();
-    });
-  </script>
+  
 
   <!-- Carga asíncrona de la librería de Google Maps con callback --><script id="ai-menu-js">
 (function(){document.addEventListener("DOMContentLoaded",function(){
@@ -1863,4 +1318,10 @@ document.addEventListener("DOMContentLoaded", function () {
    }
  });
 });})();
-</script></body></html>
+</script><script id="ai-mob-nav">(function(){var w=document.querySelector("#aiMenu .aim__wrap");if(!w)return;
+var f=document.createElement("div");f.className="aim__mob";f.innerHTML='<a class="aim__cta" href="/prenota/">Inizia qui</a>';w.appendChild(f);
+var s=document.getElementById("aiSearch"),home=s&&s.parentNode,mq=window.matchMedia("(max-width:991px)");
+function place(){if(!s)return;if(mq.matches){if(s.parentNode!==w)w.insertBefore(s,w.children[1]||null)}else if(s.parentNode!==home)home.appendChild(s)}
+place();if(mq.addEventListener)mq.addEventListener("change",place);else mq.addListener(place);
+var h=document.getElementById("brx-header");function hh(){if(h)document.documentElement.style.setProperty("--ai-hdr",(h.classList.contains("brx-sticky")?0:h.offsetHeight)+"px")}hh();window.addEventListener("resize",hh);window.addEventListener("load",hh)})();</script>
+</body></html>
